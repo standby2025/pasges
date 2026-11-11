@@ -10,17 +10,25 @@
 	--sans: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei',
 		'Helvetica Neue', Arial, sans-serif;
 	--mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-	color-scheme: light dark;
+	color-scheme: light;
 }
-@media (prefers-color-scheme: dark) {
-	:root {
-		--paper: #17181a;
-		--ink: #e6e3dc;
-		--muted: #9a9ca1;
-		--line: #2c2e31;
-		--accent: #d9826f;
-		--code-bg: #202225;
-	}
+/* 配色由页头选择器控制，避免系统暗色覆盖用户选择。 */
+:root[data-theme='mist'] {
+ --paper: #f4f7fb; --ink: #202d40; --muted: #596b82;
+ --line: #d9e2ee; --accent: #275fa4; --code-bg: #e7edf5;
+}
+:root[data-theme='forest'] {
+ --paper: #f3f7f1; --ink: #24372b; --muted: #5c705f;
+ --line: #d5e1d1; --accent: #356b45; --code-bg: #e5ede0;
+}
+:root[data-theme='rose'] {
+ --paper: #fcf5f6; --ink: #402b33; --muted: #80616d;
+ --line: #ead9df; --accent: #9b3c60; --code-bg: #f3e6eb;
+}
+:root[data-theme='night'] {
+ color-scheme: dark;
+ --paper: #18212e; --ink: #e4eaf3; --muted: #a5b5ca;
+ --line: #344359; --accent: #91bbf2; --code-bg: #222f41;
 }
 
 * {
@@ -119,7 +127,7 @@ img {
 	border-top: 1px solid var(--line);
 }
 
-/* Shiki 双主题:随系统明暗切换 */
+/* Shiki 高亮跟随所选配色。 */
 .astro-code,
 .astro-code span {
 	color: var(--shiki-light);
@@ -127,11 +135,9 @@ img {
 .astro-code {
 	background-color: var(--code-bg) !important;
 }
-@media (prefers-color-scheme: dark) {
-	.astro-code,
-	.astro-code span {
-		color: var(--shiki-dark);
-	}
+:root[data-theme='night'] .astro-code,
+:root[data-theme='night'] .astro-code span {
+ color: var(--shiki-dark);
 }
 
 .section-title {

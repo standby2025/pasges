@@ -25,3 +25,15 @@ const fullTitle = title === SITE_TITLE ? title : `${title} · ${SITE_TITLE}`;
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
+
+<!-- 首次绘制前应用配色，避免页面闪色；随机模式只在本次文档加载时抽取。 -->
+<script is:inline>
+ (() => {
+  const themes = ['paper', 'mist', 'forest', 'rose', 'night'];
+  let saved = null;
+  try { saved = localStorage.getItem('blog-theme'); } catch {}
+  const fixed = themes.includes(saved);
+  document.documentElement.dataset.theme = fixed ? saved : themes[Math.floor(Math.random() * themes.length)];
+  document.documentElement.dataset.themeMode = fixed ? saved : 'random';
+ })();
+</script>

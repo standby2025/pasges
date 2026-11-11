@@ -17,9 +17,43 @@ const isActive = (href: string) =>
 	<nav>
 		{links.map((l) => <a href={l.href} class:list={{ active: isActive(l.href) }}>{l.label}</a>)}
 	</nav>
+ <label class="theme-picker">
+  <span>配色</span>
+  <select id="theme-select" aria-label="选择页面配色">
+   <option value="random">每次随机</option>
+   <option value="paper">暖纸 · 米白</option>
+   <option value="mist">晴雾 · 蓝灰</option>
+   <option value="forest">松林 · 浅绿</option>
+   <option value="rose">蔷薇 · 淡粉</option>
+   <option value="night">深海 · 夜色</option>
+  </select>
+ </label>
 </header>
 
+<script>
+ const select = document.querySelector<HTMLSelectElement>('#theme-select');
+ const themes = ['paper', 'mist', 'forest', 'rose', 'night'];
+ if (select) {
+  select.value = document.documentElement.dataset.themeMode || 'random';
+  select.addEventListener('change', () => {
+   const value = select.value;
+   try {
+    if (value === 'random') localStorage.removeItem('blog-theme');
+    else localStorage.setItem('blog-theme', value);
+   } catch {}
+   document.documentElement.dataset.themeMode = value;
+   document.documentElement.dataset.theme = value === 'random'
+    ? themes[Math.floor(Math.random() * themes.length)] : value;
+  });
+ }
+</script>
+
 <style>
+ .theme-picker { display: flex; align-items: center; gap: .4rem; color: var(--muted); font-size: .8rem; }
+ select { max-width: 10rem; border: 1px solid var(--line); border-radius: 6px; padding: .35rem .45rem; background: var(--code-bg); color: var(--ink); font: inherit; cursor: pointer; }
+ select:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+ @media (max-width: 600px) { .site-header { flex-wrap: wrap; } .theme-picker { flex-basis: 100%; } }
+
 	.site-header {
 		max-width: var(--width);
 		margin: 0 auto;
