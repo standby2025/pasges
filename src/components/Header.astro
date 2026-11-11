@@ -1,0 +1,57 @@
+---
+import { SITE_TITLE } from '../consts';
+import { withBase } from '../lib/site';
+
+const path = Astro.url.pathname;
+const links = [
+	{ href: withBase('/'), label: '首页' },
+	{ href: withBase('/blog/'), label: '文章' },
+	{ href: withBase('/about/'), label: '关于' },
+];
+const isActive = (href: string) =>
+	href === withBase('/') ? path === href : path.startsWith(href);
+---
+
+<header class="site-header">
+	<a class="brand" href={withBase('/')}>{SITE_TITLE}</a>
+	<nav>
+		{links.map((l) => <a href={l.href} class:list={{ active: isActive(l.href) }}>{l.label}</a>)}
+	</nav>
+</header>
+
+<style>
+	.site-header {
+		max-width: var(--width);
+		margin: 0 auto;
+		padding: 1.75rem 1.25rem 1.25rem;
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 1rem;
+		border-bottom: 1px solid var(--line);
+	}
+	.brand {
+		font-family: var(--serif);
+		font-size: 1.25rem;
+		font-weight: 700;
+		letter-spacing: 0.04em;
+		color: var(--ink);
+		text-decoration: none;
+	}
+	nav {
+		display: flex;
+		gap: 1.25rem;
+	}
+	nav a {
+		color: var(--muted);
+		text-decoration: none;
+		font-size: 0.95rem;
+		padding-bottom: 2px;
+		border-bottom: 2px solid transparent;
+	}
+	nav a:hover,
+	nav a.active {
+		color: var(--ink);
+		border-bottom-color: var(--accent);
+	}
+</style>

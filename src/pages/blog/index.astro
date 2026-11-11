@@ -1,0 +1,42 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import PostList from '../../components/PostList.astro';
+import { getPosts } from '../../lib/site';
+
+const posts = await getPosts();
+const years = [...new Set(posts.map((p) => p.data.pubDate.getFullYear()))];
+---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<BaseHead title="文章" description="全部文章,按时间倒序。" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>文章</h1>
+			{
+				years.map((y) => (
+					<section>
+						<h2 class="section-title">{y}</h2>
+						<PostList posts={posts.filter((p) => p.data.pubDate.getFullYear() === y)} />
+					</section>
+				))
+			}
+			{posts.length === 0 && <p>还没有文章。</p>}
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	h1 {
+		margin: 0 0 1.5rem;
+	}
+	section {
+		margin-bottom: 1.5rem;
+	}
+</style>

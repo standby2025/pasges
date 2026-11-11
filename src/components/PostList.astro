@@ -1,0 +1,72 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { withBase } from '../lib/site';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+	posts: CollectionEntry<'blog'>[];
+}
+const { posts } = Astro.props;
+---
+
+<ul class="post-list">
+	{
+		posts.map((post) => (
+			<li>
+				<a href={withBase(`/blog/${post.id}/`)}>
+					<h3>{post.data.title}</h3>
+					<p>{post.data.description}</p>
+					<div class="meta">
+						<FormattedDate date={post.data.pubDate} />
+						{post.data.tags.map((t) => <span class="tag">{t}</span>)}
+					</div>
+				</a>
+			</li>
+		))
+	}
+</ul>
+
+<style>
+	.post-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	li + li {
+		border-top: 1px solid var(--line);
+	}
+	a {
+		display: block;
+		padding: 1.25rem 0;
+		color: inherit;
+		text-decoration: none;
+	}
+	h3 {
+		margin: 0 0 0.35rem;
+		font-family: var(--serif);
+		font-size: 1.25rem;
+		line-height: 1.4;
+		color: var(--ink);
+	}
+	a:hover h3 {
+		color: var(--accent);
+	}
+	p {
+		margin: 0 0 0.5rem;
+		color: var(--muted);
+	}
+	.meta {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.6rem;
+		font-size: 0.85rem;
+		color: var(--muted);
+	}
+	.tag {
+		padding: 0 0.5rem;
+		border: 1px solid var(--line);
+		border-radius: 3px;
+		font-size: 0.78rem;
+	}
+</style>
