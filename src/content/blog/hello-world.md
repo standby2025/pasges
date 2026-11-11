@@ -3,6 +3,7 @@ title: 你好,世界:这个博客怎么用
 description: 一篇示例文章,演示 frontmatter、代码块、引用和表格,写自己的文章时可以直接删掉。
 pubDate: 2026-11-10
 tags: [说明]
+draft: true
 ---
 
 这是模板自带的示例文章。新文章放在 `src/content/blog/` 下,一篇一个 `.md` 或 `.mdx` 文件,文件名即 URL。

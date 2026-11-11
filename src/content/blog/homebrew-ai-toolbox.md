@@ -1,0 +1,428 @@
+---
+title: 别再挨个追新了：用 Homebrew 管好你 Mac 上的 AI 工具
+description: 用 Homebrew 统一安装、升级和管理 Mac 上的 AI 工具，附热门工具覆盖情况、更新时差统计与图形界面选择指南。
+pubDate: 2026-11-11
+tags: [Homebrew, AI 工具, macOS]
+draft: false
+---
+
+<div class="homebrew-article">
+
+
+<p class="meta">文中数据截至 2026 年 11 月 9 日</p>
+
+<p>前阵子你是不是跟着教程装了一堆 AI 工具？Claude Code、Ollama、Gemini CLI，一口气都上了。</p>
+<p>三个工具，三种装法。有的用 npm 装，有的粘贴一行 curl 脚本，还有的去官网下载 dmg 安装包。</p>
+<p>npm 是程序员常用的软件仓库工具，curl 脚本就是从网上下一段脚本直接运行，dmg 则是 Mac 上常见的安装镜像文件。这三种方式各管各的，彼此不通气。</p>
+<p>装好没多久，每个工具都提示“有新版本”。你不知道该去哪里升级，升完一个，另一个又出了问题。这不是你笨，是这种各装各的做法本来就难维护。</p>
+<p>AI 工具一周一个版本，追新是个无底洞。与其一个个手动追，不如交给一个统一的入口去管，这个入口就是 Homebrew。</p>
+<p>你可能会觉得，不就是升级吗，点一下不就好了。问题在于，每个工具都有自己的一套更新方式，有的要重新运行安装脚本，有的要重新下载安装包，还有的要去翻它的更新说明。工具一多，光是记住“我到底装了什么、该怎么升”，就已经占掉了大半精力。</p>
+<p>这就像家里同时用着七八个遥控器，每个遥控器的电池、按键和换台方式都不一样。你想看个电视，得先找对遥控器，还得想起它的用法。统一入口的意思，就是把这些遥控器换成一个万能遥控，剩下的事情交给它。</p>
+
+<figure>
+  <div class="hero">
+    <div>
+      <svg viewBox="0 0 304 250" role="img" aria-label="以前：Claude Code 用 curl 脚本、Ollama 用官网 dmg、Gemini CLI 用 npm，三种装法各管各的">
+        <defs><marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="ah-muted"/></marker></defs>
+        <text x="6" y="22" class="t-ink t-b" style="font-size:15px">以前：各装各的</text>
+        <rect x="6" y="50" width="104" height="40" rx="8" class="box"/><text x="58" y="75" text-anchor="middle" class="t-2">curl 脚本</text>
+        <rect x="6" y="110" width="104" height="40" rx="8" class="box"/><text x="58" y="135" text-anchor="middle" class="t-2">官网 dmg</text>
+        <rect x="6" y="170" width="104" height="40" rx="8" class="box"/><text x="58" y="195" text-anchor="middle" class="t-2">npm</text>
+        <line x1="110" y1="70" x2="152" y2="70" class="link" marker-end="url(#ah1)"/>
+        <line x1="110" y1="130" x2="152" y2="130" class="link" marker-end="url(#ah1)"/>
+        <line x1="110" y1="190" x2="152" y2="190" class="link" marker-end="url(#ah1)"/>
+        <rect x="156" y="50" width="140" height="40" rx="8" class="box"/><text x="226" y="75" text-anchor="middle" class="t-ink">Claude Code</text>
+        <rect x="156" y="110" width="140" height="40" rx="8" class="box"/><text x="226" y="135" text-anchor="middle" class="t-ink">Ollama</text>
+        <rect x="156" y="170" width="140" height="40" rx="8" class="box"/><text x="226" y="195" text-anchor="middle" class="t-ink">Gemini CLI</text>
+        <text x="6" y="240" class="t-2">3 种装法，3 套升级方式</text>
+      </svg>
+    </div>
+    <div>
+      <svg viewBox="0 0 304 250" role="img" aria-label="现在：三个工具都交给 Homebrew，一条 brew upgrade 统一升级">
+        <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="ah-accent"/></marker></defs>
+        <text x="6" y="22" class="t-ink t-b" style="font-size:15px">现在：交给 Homebrew</text>
+        <rect x="6" y="100" width="120" height="60" rx="10" class="box-accent"/>
+        <text x="66" y="126" text-anchor="middle" class="t-on t-b" style="font-size:15px">Homebrew</text>
+        <text x="66" y="146" text-anchor="middle" class="t-on mono" style="font-size:12px">brew upgrade</text>
+        <path d="M126 130 C146 130 140 70 158 70" class="link-accent" marker-end="url(#ah2)"/>
+        <path d="M126 130 C146 130 140 130 158 130" class="link-accent" marker-end="url(#ah2)"/>
+        <path d="M126 130 C146 130 140 190 158 190" class="link-accent" marker-end="url(#ah2)"/>
+        <rect x="162" y="50" width="134" height="40" rx="8" class="box"/><text x="229" y="75" text-anchor="middle" class="t-ink">Claude Code</text>
+        <rect x="162" y="110" width="134" height="40" rx="8" class="box"/><text x="229" y="135" text-anchor="middle" class="t-ink">Ollama</text>
+        <rect x="162" y="170" width="134" height="40" rx="8" class="box"/><text x="229" y="195" text-anchor="middle" class="t-ink">Gemini CLI</text>
+        <text x="6" y="240" class="t-2">1 个入口，1 条命令</text>
+      </svg>
+    </div>
+  </div>
+  <figcaption>同样三个工具，换个入口，升级就从三件事变成一件事。</figcaption>
+</figure>
+
+<h2>Homebrew 到底是什么</h2>
+<p>先解释两个词。终端是 Mac 上那个黑底白字的窗口，很多 AI 工具都在里面运行。包管理器则是一个替你统一下载、安装、升级、卸载软件的管家。</p>
+<p>Homebrew 可以理解成 Mac 上的“命令行版 App Store”。它的官方口号是 The Missing Package Manager for macOS，意思是“macOS 缺失的包管理器”。</p>
+<p>App Store 管的是图形界面的 App，Homebrew 主要管命令行工具，像 AI 编程助手、本地模型这类在终端里跑的程序。普通的图形 App 它也能装，只是要多加一个参数。</p>
+<p>这就像家里的快递驿站。东西不管从哪家寄来，都在一个地方签收、查看、退换，你不用记每家快递的规矩。</p>
+
+<h2>它是怎么来的</h2>
+<p>Homebrew 2009 年由英国开发者 Max Howell 发起。<mark class="verify">待核实</mark>他当时觉得 MacPorts、Fink 这些同类工具太难用，于是自己动手写了一个。</p>
+<p>名字和术语都来自自酿啤酒：formula 是配方，bottle 是瓶装，cask 是酒桶，tap 是酒头。你后面会碰到 cask 这个词，它指的就是图形 App 那一类。</p>
+<p>Homebrew 很快成了 Mac 开发者的事实标准。几乎每个开源工具的说明文档里，macOS 那一栏写的第一种安装方式都是用 Homebrew。很多开发者拿到新 Mac 的第一件事，就是先把它装上。</p>
+<p>2015 年，作者去 Google 面试，因为没能在白板上写出“翻转二叉树”被拒。<mark class="verify">待核实</mark>他随后发了一条很有名的推文：“Google 90% 的工程师都在用你写的软件……”<mark class="verify">待核实</mark>这件事从侧面说明了它有多普及。</p>
+<p>Homebrew 也一路跟上了 Mac 的变化，它用 Cask 收编了图形应用，2021 年开始原生支持 Apple Silicon（苹果自研的芯片）。<mark class="verify">待核实</mark>2026 年，它又推出了官方图形界面，后面会专门讲这个。</p>
+<p>Homebrew 是由志愿者维护的开源项目，靠社区捐助运营。它在 AI 浪潮之前就已经是 Mac 开发者的基础设施，AI 只是把一批新用户带到了它面前。所以它是一个经过很多年检验的入口，适合放心交给它。</p>
+
+<h2>为什么说追新不如交给它</h2>
+<p>这一章是全文的重点。道理很简单：AI 工具一周一个版本，各家的装法还不一样，新手既记不住，也查不清。</p>
+<p><strong>一条命令全部升级。</strong>Homebrew 装过的工具，都可以用一条命令统一升级：</p>
+<pre><code>brew upgrade</code></pre>
+<p>这就像手机里的应用更新，不用一个个点进去，一键全部搞定。它是全文最重要的一条，记住它，追新就不用再靠记忆。</p>
+<p>更关键的是，这条命令不挑工具。你装在 Homebrew 里的 AI 编程助手、本地模型、命令行小工具，都会被一起检查、一起升级。你不需要知道每个工具的更新网址，也不用在十几个窗口之间来回切换，只需要在终端里敲一次。</p>
+<p>很多人会问：Homebrew 上的版本更新得快不快？我们统计了 9 个主流 AI 工具最近 90 天的 222 次版本更新，统计区间是 2026 年 8 月 11 日到 11 月 9 日。</p>
+<p>结果是，70% 的更新在官方发布后 6 小时内上架 Homebrew，87% 在 24 小时内上架。下面这张图和表是每个工具的具体情况，“中位时差”是把所有版本的等待时间排好队后取中间那个，比平均值更不容易被个别极端情况拉偏。</p>
+
+<figure>
+  <p class="fig-title">官方发布新版后，多久能在 Homebrew 里装到</p>
+  <p class="fig-sub">各工具中位时差，2026-08-11 至 2026-11-09</p>
+  <div class="hb" role="img" aria-label="9 个 AI 工具的中位上架时差：OpenCode 0.5 小时，uv 1.6，llama.cpp 1.6，Codex 1.8，Claude Code 3.5，Hermes Agent 6.7，OpenClaw 8.0，Ollama 25.0，Gemini CLI 26.8">
+    <div class="hb-ref" style="--p:0.15"><span>6 小时</span></div>
+    <div class="hb-ref" style="--p:0.6"><span>24 小时</span></div>
+    <div class="hb-row" title="OpenCode：中位 0.5 小时；可对上的 8 个版本里 7 个在 24 小时内上架"><span class="hb-name">OpenCode</span><span class="hb-track"><span class="hb-bar" style="width:1.25%"></span><span class="hb-val">0.5 小时</span></span></div>
+    <div class="hb-row" title="uv：中位 1.6 小时；28 个版本全部在 24 小时内上架"><span class="hb-name">uv</span><span class="hb-track"><span class="hb-bar" style="width:4%"></span><span class="hb-val">1.6 小时</span></span></div>
+    <div class="hb-row" title="llama.cpp（正式版）：中位 1.6 小时；3 个版本全部在 24 小时内上架"><span class="hb-name">llama.cpp</span><span class="hb-track"><span class="hb-bar" style="width:4%"></span><span class="hb-val">1.6 小时</span></span></div>
+    <div class="hb-row" title="Codex：中位 1.8 小时；34 个版本全部在 24 小时内上架"><span class="hb-name">Codex</span><span class="hb-track"><span class="hb-bar" style="width:4.5%"></span><span class="hb-val">1.8 小时</span></span></div>
+    <div class="hb-row" title="Claude Code（@latest）：中位 3.5 小时；76 个版本全部在 24 小时内上架"><span class="hb-name">Claude Code</span><span class="hb-track"><span class="hb-bar" style="width:8.75%"></span><span class="hb-val">3.5 小时</span></span></div>
+    <div class="hb-row" title="Hermes Agent：中位 6.7 小时；16 个版本里 12 个在 24 小时内上架"><span class="hb-name">Hermes Agent</span><span class="hb-track"><span class="hb-bar" style="width:16.75%"></span><span class="hb-val">6.7 小时</span></span></div>
+    <div class="hb-row" title="OpenClaw：中位 8.0 小时；20 个版本全部在 24 小时内上架"><span class="hb-name">OpenClaw</span><span class="hb-track"><span class="hb-bar" style="width:20%"></span><span class="hb-val">8.0 小时</span></span></div>
+    <div class="hb-row" title="Ollama：中位 25.0 小时；33 个版本里 14 个在 24 小时内上架"><span class="hb-name">Ollama</span><span class="hb-track"><span class="hb-bar" style="width:62.5%"></span><span class="hb-val">25.0 小时</span></span></div>
+    <div class="hb-row" title="Gemini CLI：中位 26.8 小时；4 个版本都超过 24 小时"><span class="hb-name">Gemini CLI</span><span class="hb-track"><span class="hb-bar" style="width:67%"></span><span class="hb-val">26.8 小时</span></span></div>
+  </div>
+  <figcaption>时差 = 官方在 GitHub 发布（Claude Code 取 npm 发布时间）到 Homebrew 合并该版本的时间。</figcaption>
+</figure>
+
+<div class="table-wrap">
+<table>
+  <thead><tr><th>工具</th><th class="num">中位时差</th><th class="num">6 小时内上架</th><th class="num">24 小时内上架</th><th class="num">最慢一次</th></tr></thead>
+  <tbody>
+    <tr><td>Codex</td><td class="num">1.8 小时</td><td class="num">34 / 34</td><td class="num">34 / 34</td><td class="num">3.4 小时</td></tr>
+    <tr><td>uv</td><td class="num">1.6 小时</td><td class="num">27 / 28</td><td class="num">28 / 28</td><td class="num">17.1 小时</td></tr>
+    <tr><td>llama.cpp（正式版）</td><td class="num">1.6 小时</td><td class="num">3 / 3</td><td class="num">3 / 3</td><td class="num">2.8 小时</td></tr>
+    <tr><td>Claude Code（@latest）</td><td class="num">3.5 小时</td><td class="num">67 / 76</td><td class="num">76 / 76</td><td class="num">17.9 小时</td></tr>
+    <tr><td>OpenCode</td><td class="num">0.5 小时</td><td class="num">6 / 8</td><td class="num">7 / 8</td><td class="num">270 小时</td></tr>
+    <tr><td>Hermes Agent</td><td class="num">6.7 小时</td><td class="num">7 / 16</td><td class="num">12 / 16</td><td class="num">311 小时</td></tr>
+    <tr><td>OpenClaw</td><td class="num">8.0 小时</td><td class="num">8 / 20</td><td class="num">20 / 20</td><td class="num">22.9 小时</td></tr>
+    <tr><td>Ollama</td><td class="num">25.0 小时</td><td class="num">4 / 33</td><td class="num">14 / 33</td><td class="num">281 小时</td></tr>
+    <tr><td>Gemini CLI</td><td class="num">26.8 小时</td><td class="num">0 / 4</td><td class="num">0 / 4</td><td class="num">128 小时</td></tr>
+    <tr class="total"><td>合计</td><td class="num">—</td><td class="num">156 / 222（70%）</td><td class="num">194 / 222（87%）</td><td class="num">—</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>表格里的分母，是能和官方发布记录对上的版本数。llama.cpp 和 OpenCode 有一部分更新对不上官方记录，没有计入统计。</p>
+<p>Codex、uv、llama.cpp 的中位数都不到 2 小时，Claude Code 约 3.5 小时。OpenCode 有时甚至比 GitHub 发布页还早，一共 3 次，这种情况记为 0。Ollama 和 Gemini CLI 的中位数在 1 天左右，属于慢的一档。</p>
+<p>个别版本拖得更久，最慢的一次接近两周，表格最后一列写得很清楚。Gemini CLI 也有掉队的时候。从 9 月中旬到 10 月 19 日，Homebrew 里的版本一直停在 0.46.0，同期官方已经发布到 0.63.0，10 月 19 日才一次跳到 0.64.0。这段停滞不算在上面的时差里。</p>
+<p>还有一种情况不算滞后：一天发好几版的工具，Homebrew 会直接跳到最新版，中间的版本不会一个个上架。</p>
+<p>对新手来说，晚几个小时到一天，换来的是不用自己盯着更新。真要抢首发，再去官方渠道装就行。所以准确的说法是：多数几小时内上架，慢的一天左右。</p>
+<p>顺便提一个小知识：Claude Code 有两个版本可选，<code>claude-code</code> 跟随官方稳定版，<code>claude-code@latest</code> 跟随最新版。想稳一点选前者，想尝鲜就选后者。</p>
+<p>除了省心追新，Homebrew 还有几个好处。</p>
+<p><strong>不用先学环境配置。</strong>很多 AI 工具背后要 Python、Node 之类的运行环境。你不必先搞懂这些，装上就能用。</p>
+<p><strong>装了什么一目了然。</strong>装过的东西都有记录，哪天不想用了，卸载就行。模型文件是例外，后面会讲。</p>
+<p><strong>比网上随便复制的脚本更让人放心。</strong>Homebrew 上的每个包都经过公开审核，下载的文件还有校验。</p>
+<p><strong>换新电脑也好办。</strong>把装过的东西整理成一份清单，换新 Mac 时可以一次装回来，延伸阅读里有做法。</p>
+<p>AI 工具会一直这么快地迭代下去。与其每个都手动追，不如让 Homebrew 替你盯着。</p>
+
+<h2>新手只记五条命令</h2>
+<p>Homebrew 的命令很多，但新手日常真正用得上的，只有下面这几条。</p>
+<p>第一步是装 Homebrew 本身。去 Homebrew 官网（brew.sh）复制那一行安装命令，粘贴到终端里回车就行。网络慢的话，可以换成国内镜像，延伸阅读里有名字可以搜。</p>
+<p>装好之后，记住下面这五种写法：</p>
+<pre><code>brew install 名字
+brew install --cask 名字
+brew upgrade
+brew list
+brew uninstall 名字</code></pre>
+<p>第一条用来装命令行工具，比如一个 AI 编程助手。第二条多了 <code>--cask</code>，专门用来装带窗口的图形 App。</p>
+<p>第三条是 upgrade，也就是升级，这是全文最重要的一条，前面讲的追新就靠它。第四条 list 用来查看你都装了什么，像翻一下家里的物品清单。第五条 uninstall 用来卸载，不想要的东西就让它离开。</p>
+<p>这五条记熟，AI 工具再怎么更新，你只需要想起 upgrade 那一条。其他命令先不用管，进阶内容放在文末。</p>
+<p>日常的节奏也很简单。装好之后，隔一段时间想起来，就在终端里敲一次 upgrade，顺便用 list 看看装了哪些东西。不用每天盯着，也不用每个版本都去看说明，这就是“省心追新”的全部秘诀。</p>
+<p>如果哪天某个工具用不上了，就用 uninstall 把它请出去。Homebrew 的好处之一，就是装和卸都走同一套规矩，不会留下一堆来路不明的残留。</p>
+
+<h2>你听说过的 AI 工具，Homebrew 基本都有</h2>
+<p>GitHub 上的 star 可以理解成“点赞收藏”。star 超过 10 万的项目共 141 个，我们从中挑出 AI 相关的，逐个去 Homebrew 里查，数据截至 2026 年 11 月 9 日。</p>
+<p>结论很直接：Agent 和本地模型 100%，装了就能用的 AI 软件 74%。</p>
+<p>对新手来说，这个数字的意义在于：你在教程里看到的那些热门名字，大多数都能从同一个地方装。你不必为每个工具单独找安装页面，也不必担心选错渠道。先去 Homebrew 查一下，多半就能找到答案，找不到的少数情况，再按下面的分类去处理。</p>
+<p>Agent 指能替你动手干活的 AI 程序，这一类有 8 个，OpenClaw、DeepSeek Harness、Hermes Agent、OpenCode、Claude Code、Codex、Gemini CLI、Pi 全都在 Homebrew 官方仓库里。本地模型类有 Ollama、llama.cpp、Whisper 三个，同样全部在官方仓库。</p>
+<p>分类是人工判断的。像 claw-code 这类被归为实验项目的，就没有计入这 8 个。</p>
+
+<figure>
+  <p class="fig-title">GitHub 10 万星以上、装了就能用的 AI 软件，23 个里 17 个能用 Homebrew 装</p>
+  <p class="fig-sub">每个方块是一个项目</p>
+  <div class="legend">
+    <span><i class="i-core"></i>Homebrew 官方仓库</span>
+    <span><i class="i-tap"></i>项目自家的 tap</span>
+    <span><i class="i-none"></i>暂未收录</span>
+  </div>
+  <div class="cov-group">
+    <div class="cov-head"><b>AI Agent 和编程助手</b><em>8 / 8</em></div>
+    <div class="chips">
+      <span class="chip core">OpenClaw</span><span class="chip core">DeepSeek Harness</span><span class="chip core">Hermes Agent</span><span class="chip core">OpenCode</span><span class="chip core">Claude Code</span><span class="chip core">Codex</span><span class="chip core">Gemini CLI</span><span class="chip core">Pi</span>
+    </div>
+  </div>
+  <div class="cov-group">
+    <div class="cov-head"><b>本地模型</b><em>3 / 3</em></div>
+    <div class="chips">
+      <span class="chip core">Ollama</span><span class="chip core">llama.cpp</span><span class="chip core">Whisper</span>
+    </div>
+  </div>
+  <div class="cov-group">
+    <div class="cov-head"><b>其他 AI 工具和桌面 App</b><em>6 / 12</em></div>
+    <div class="chips">
+      <span class="chip core">cc-switch</span><span class="chip core">spec-kit</span><span class="chip core">ComfyUI 桌面版</span><span class="chip core">Open Design</span><span class="chip tap">Orca</span><span class="chip tap">VoiceStudio</span><span class="chip none">claw-code</span><span class="chip none">Stable Diffusion WebUI</span><span class="chip none">Graphify</span><span class="chip none">MoneyPrinterTurbo</span><span class="chip none">Paperclip</span><span class="chip none">RuView</span>
+    </div>
+  </div>
+  <figcaption>17 个能装的项目里，15 个在官方仓库，2 个在项目自家的 tap。插件、技能包、提示词合集、教程和模型权重不是独立软件，没有计入。</figcaption>
+</figure>
+
+<p>这里的“装了就能用”，指下载装上就能直接用的软件，不包括需要写代码才能调用的库。这 23 个里，17 个能用 Homebrew 装。其中 15 个在官方仓库，2 个在项目自家的 tap（可以理解成作者自己开的小仓库）。</p>
+<p>Homebrew 覆盖的范围比你想象的还广。桌面版和工具方面，有 cc-switch、ComfyUI 桌面版、Open WebUI 桌面版、Open Design、LM Studio、Claude、ChatGPT。</p>
+<p>框架方面，PyTorch 有官方收录，Hugging Face 有 hf 命令行，LangChain 有 langgraph-cli。这里的收录，指的是 Homebrew 官方仓库里有一份可以直接安装的“配方”（formula）。</p>
+<p>环境方面有 uv、python、node。其中 uv 是管理 Python 环境的工具，过去 30 天被安装了 206,718 次。</p>
+<p>新的小项目也不少。和 AI 相关的包约 300 个，其中 88 个在 GitHub 上不到 1000 星。</p>
+
+<figure>
+  <p class="fig-title">Homebrew 里的 AI 相关包，近三成在 GitHub 上不到 1000 星</p>
+  <p class="fig-sub">按 GitHub star 数分组，共 297 个可查到 star 数的包</p>
+  <div class="vc" role="img" aria-label="不到 1000 星 88 个，1000 到 1 万星 126 个，1 万到 10 万星 72 个，10 万星以上 11 个">
+    <div class="vc-col hl" title="不到 1000 星：88 个"><span class="vc-val">88 个</span><span class="vc-bar" style="height:105px"></span></div>
+    <div class="vc-col" title="1000～1 万星：126 个"><span class="vc-val">126 个</span><span class="vc-bar" style="height:150px"></span></div>
+    <div class="vc-col" title="1 万～10 万星：72 个"><span class="vc-val">72 个</span><span class="vc-bar" style="height:86px"></span></div>
+    <div class="vc-col" title="10 万星以上：11 个"><span class="vc-val">11 个</span><span class="vc-bar" style="height:13px"></span></div>
+  </div>
+  <div class="vc-cat"><span>不到 1000 星</span><span>1000～1 万</span><span>1 万～10 万</span><span>10 万以上</span></div>
+  <figcaption>按包描述里的 AI 关键词粗略筛选，个别包可能被误判。</figcaption>
+</figure>
+
+<p>比如 splitrail（228 星）能实时监控 AI 编程助手的 token 用量和花费，token 可以粗略理解成 AI 计费的计量单位。claude-hooks（397 星）是 Claude Code 的 hook 管理工具，hook 可以理解成在某个时机自动触发的小机关。happy-coder（551 星）则能用手机操作电脑上的 AI 编程助手。</p>
+<p>热度也能说明问题。过去 30 天的安装次数里，Codex 有 351,138 次，Ollama 有 62,453 次（另有 App 版 8,975 次），Claude Code 有 58,378 次，OpenCode 有 45,393 次，llama.cpp 有 35,373 次。这是 Homebrew 公开统计的数字，只计算开启了统计的用户，实际会更高。</p>
+
+<figure>
+  <p class="fig-title">过去 30 天，通过 Homebrew 安装的次数</p>
+  <p class="fig-sub">Homebrew 公开统计，只计开启了统计的用户</p>
+  <div class="hb" style="padding-top:0" role="img" aria-label="Codex 351,138 次，uv 206,718 次，Ollama 62,453 次，Claude Code 58,378 次，OpenCode 45,393 次，llama.cpp 35,373 次">
+    <div class="hb-row" title="Codex：351,138 次"><span class="hb-name">Codex</span><span class="hb-track"><span class="hb-bar" style="width:78.03%"></span><span class="hb-val">35.1 万</span></span></div>
+    <div class="hb-row" title="uv：206,718 次"><span class="hb-name">uv</span><span class="hb-track"><span class="hb-bar" style="width:45.94%"></span><span class="hb-val">20.7 万</span></span></div>
+    <div class="hb-row" title="Ollama：62,453 次（App 版另有 8,975 次）"><span class="hb-name">Ollama</span><span class="hb-track"><span class="hb-bar" style="width:13.88%"></span><span class="hb-val">6.2 万</span></span></div>
+    <div class="hb-row" title="Claude Code：58,378 次"><span class="hb-name">Claude Code</span><span class="hb-track"><span class="hb-bar" style="width:12.97%"></span><span class="hb-val">5.8 万</span></span></div>
+    <div class="hb-row" title="OpenCode：45,393 次"><span class="hb-name">OpenCode</span><span class="hb-track"><span class="hb-bar" style="width:10.09%"></span><span class="hb-val">4.5 万</span></span></div>
+    <div class="hb-row" title="llama.cpp：35,373 次"><span class="hb-name">llama.cpp</span><span class="hb-track"><span class="hb-bar" style="width:7.86%"></span><span class="hb-val">3.5 万</span></span></div>
+  </div>
+  <figcaption>Ollama 只计命令行版，App 版另有 8,975 次。</figcaption>
+</figure>
+
+<p>也有一些热门项目不在 Homebrew 里，搜不到时别以为自己搞错了。它们大致分四类：</p>
+<ul>
+  <li>平台类，比如 n8n、Dify、AutoGPT，一般用 Docker 部署。Docker 可以理解成把软件连同运行环境打包好的“集装箱”，新手可以先用它们的官方云服务。</li>
+  <li>开发库和框架，比如 Transformers、LangChain、browser-use。它们是写代码时调用的库，应该按项目的说明，用 pip 或 uv 装进具体的项目里。pip 是 Python 自带的安装工具。</li>
+  <li>Python 脚本类，比如 Stable Diffusion WebUI、MoneyPrinterTurbo，按项目说明装即可。想画图的新手，可以直接装 ComfyUI 桌面版，省事很多。</li>
+  <li>内容类，比如 skills、提示词合集、教程、模型权重。它们本身就不是软件，谈不上“安装”。</li>
+</ul>
+<p>所以不用记住所有名字，记住“先去 Homebrew 查一下”就够了。搜不到的，就按上面的类别去找正确的装法。</p>
+
+<h2>不想碰终端？先试官方 App</h2>
+<p>如果你连终端都不想碰，Homebrew 也有适合你的入口。在 Homebrew 7.0（2026 年 9 月）里，它推出了官方图形界面，对新手最友好。</p>
+<p>点按钮就能完成安装和升级，同时还会显示对应的命令，你可以边用边学。装法同样只有一行：</p>
+<pre><code>brew install --cask homebrew-app</code></pre>
+<p>装好后会得到一个叫 Homebrew.app 的应用。它的源码仓库叫 Homebrew/BrewUI，所以网上也有人叫它 BrewUI。</p>
+
+<figure>
+  <div class="shots">
+    <div class="shot">截图待补<br>Homebrew.app 主界面</div>
+    <div class="shot">截图待补<br>升级列表页面</div>
+    <div class="shot">截图待补<br>操作时显示的对应命令</div>
+  </div>
+  <figcaption>Homebrew.app 需要 macOS 26 及以上，当前版本 0.6.0。</figcaption>
+</figure>
+
+<p>用之前有三点心里要有数：当前版本是 0.6.0，还没到 1.0；需要 macOS 26 及以上；过去 30 天安装了 5,251 次。</p>
+<p>把升级也做成按钮，等于把追新这件事放进了一个看得见的界面。你随时点一下，就能看到哪个工具该更新了。</p>
+<p>这有点像汽车的仪表盘。你不用懂发动机的每一个零件，只要看一眼指示灯，就知道该不该去保养。对于还没打算深入终端的新手，这种“看得见”的方式，反而更容易坚持下来。</p>
+
+<h2>第三方 App 怎么选</h2>
+<p>除了官方 App，社区里还有几款第三方图形界面，各有所长。</p>
+<ul>
+  <li><strong>Applite</strong>：免费，界面像应用商店，只管图形应用，最适合纯新手。<mark class="verify">待核实</mark></li>
+  <li><strong>Cork</strong>：功能最全，但需要付费。<mark class="verify">待核实</mark></li>
+  <li><strong>Bold Brew</strong>：在终端里使用的界面，它本身也是通过 Homebrew 安装的，适合想慢慢学终端的人。</li>
+  <li><strong>Cakebrew 等老工具</strong>：已经停更，不推荐。<mark class="verify">待核实</mark></li>
+</ul>
+<p>选择可以很简单。系统是 macOS 26，直接用官方 App；系统较老、只想装软件，用 Applite；想管得更细，用 Cork。</p>
+
+<figure>
+  <p class="fig-title">图形界面怎么选</p>
+  <div class="flow">
+  <svg viewBox="0 0 360 280" role="img" aria-label="选择流程：系统是 macOS 26 或更新，选官方 Homebrew.app；否则，只想装普通 App 选 Applite，想管得更细选 Cork；喜欢终端可以选 Bold Brew">
+    <defs><marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="ah-muted"/></marker></defs>
+    <rect x="10" y="10" width="160" height="60" rx="10" class="box"/>
+    <text x="90" y="35" text-anchor="middle" class="t-ink">系统是 macOS 26</text>
+    <text x="90" y="55" text-anchor="middle" class="t-ink">或更新？</text>
+    <rect x="10" y="110" width="160" height="60" rx="10" class="box"/>
+    <text x="90" y="135" text-anchor="middle" class="t-ink">只想装带窗口的</text>
+    <text x="90" y="155" text-anchor="middle" class="t-ink">普通 App？</text>
+    <rect x="10" y="210" width="160" height="60" rx="10" class="box-tint"/>
+    <text x="90" y="235" text-anchor="middle" class="t-ink t-b">Cork</text>
+    <text x="90" y="255" text-anchor="middle" class="t-2" style="font-size:12px">功能最全，管得更细</text>
+
+    <rect x="210" y="10" width="140" height="60" rx="10" class="box-tint"/>
+    <text x="280" y="35" text-anchor="middle" class="t-ink t-b">官方 Homebrew.app</text>
+    <text x="280" y="55" text-anchor="middle" class="t-2" style="font-size:12px">免费，边点边学命令</text>
+    <rect x="210" y="110" width="140" height="60" rx="10" class="box-tint"/>
+    <text x="280" y="135" text-anchor="middle" class="t-ink t-b">Applite</text>
+    <text x="280" y="155" text-anchor="middle" class="t-2" style="font-size:12px">免费，像应用商店</text>
+    <rect x="210" y="210" width="140" height="60" rx="10" class="box"/>
+    <text x="280" y="235" text-anchor="middle" class="t-ink t-b">Bold Brew</text>
+    <text x="280" y="255" text-anchor="middle" class="t-2" style="font-size:12px">喜欢终端也可以选它</text>
+
+    <line x1="170" y1="40" x2="206" y2="40" class="link" marker-end="url(#ah3)"/>
+    <text x="188" y="32" text-anchor="middle" class="t-muted" style="font-size:12px">是</text>
+    <line x1="170" y1="140" x2="206" y2="140" class="link" marker-end="url(#ah3)"/>
+    <text x="188" y="132" text-anchor="middle" class="t-muted" style="font-size:12px">是</text>
+    <line x1="90" y1="70" x2="90" y2="106" class="link" marker-end="url(#ah3)"/>
+    <text x="100" y="93" class="t-muted" style="font-size:12px">否</text>
+    <line x1="90" y1="170" x2="90" y2="206" class="link" marker-end="url(#ah3)"/>
+    <text x="100" y="193" class="t-muted" style="font-size:12px">否</text>
+  </svg>
+  </div>
+</figure>
+
+<p>无论选哪个，它们管的还是同一个 Homebrew，你学会的命令在哪儿都能用。</p>
+<p>选 App 有点像去超市买菜。有的超市门口一眼能看到全部分类，适合逛一圈就买；有的超市货架分得细，适合每次都知道自己要什么的人。两家超市的收银台是同一套，你换着逛都不吃亏。</p>
+<p>这也正是前面说的那个立意：入口可以换，追新的活儿始终交给同一个管家。</p>
+
+<h2>几个小提醒</h2>
+<p><strong>同一个工具只用一种方式装。</strong>别先用 Homebrew 装一遍，又照着另一篇教程用 npm 再装一遍。两套并存时，你很难分清自己到底在用哪一个。这就像家里有两把钥匙开同一把锁，时间一长，你就不记得哪把是新配的了。</p>
+<p><strong>想第一时间用上新功能，可以走官方渠道。</strong>它通常会比 Homebrew 早几个小时，慢的时候早一天左右，偶尔的抢先体验值得这么做。只是这样做之后，那个工具就要换成官方那条线去维护，别再混着用。</p>
+<p><strong>模型文件很大，不归 Homebrew 管。</strong>卸载工具后，记得手动清理这些模型文件，否则硬盘会悄悄变满。Homebrew 管的是程序本身，模型文件像是搬进来的行李，要自己负责收拾。</p>
+
+<h2>结尾</h2>
+<p>AI 工具会一直这么快地更新下去。与其每个都手动追，不如把追新交给 Homebrew，把精力留给真正用 AI 做事。</p>
+<p>回头想想，你最初的困扰并不是技术不够，而是要记的东西太多。把“怎么装、怎么升、怎么卸”这些重复的事情统一起来，脑子里就能腾出空间，去想今天要用 AI 解决什么问题。这才是工具存在的意义。</p>
+<p>如果你读完这篇，只记住一件事，那就是 upgrade。之后每次看到 AI 工具又发新版本，别急着去翻说明书，想一想，它大概率已经在 Homebrew 里等着你了。</p>
+<p>你现在用 Homebrew 管了哪些 AI 工具？欢迎在评论区告诉我，我们一起看看还有没有漏掉的好工具。</p>
+
+<h2>延伸阅读</h2>
+<ul>
+  <li>常用命令速查：search、info、outdated、pin、cleanup、doctor、services</li>
+  <li>国内镜像配置：清华 TUNA、中科大 USTC</li>
+  <li>用 Brewfile 备份和迁移整套工具</li>
+</ul>
+
+<h2>参考资料</h2>
+<ul>
+  <li><a href="https://brew.sh/2026/09/13/homebrew-7.0.0/">Homebrew 7.0.0 发布说明</a></li>
+  <li><a href="https://brew.sh/2025/11/12/homebrew-5.0.0">Homebrew 5.0.0 发布说明</a></li>
+  <li><a href="https://mac.install.guide/homebrew/brewui">BrewUI 安装指南（Mac Install Guide）</a></li>
+  <li><a href="https://talk.macpowerusers.com/t/homebrew-now-has-its-own-native-macos-app/46925">MPU Talk：Homebrew 官方 macOS App 讨论</a></li>
+  <li><a href="https://setapp.com/tech-talks/best-homebrew-gui-for-mac">Setapp：Homebrew 图形界面工具推荐</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Homebrew_(package_manager)">Homebrew 维基百科词条</a></li>
+</ul>
+
+
+</div>
+
+<style>
+.homebrew-article {
+--surface: var(--code-bg); --ink-2: var(--muted); --grid: var(--line); --axis: var(--line); --border: var(--line); --accent-soft: color-mix(in srgb, var(--accent) 50%, var(--paper)); --accent-tint: var(--code-bg); --tap: #6250d6; --mark-bg: #fff1c7; --mark-ink: #6b4a00;
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 36px; }
+h2 { font-size: 22px; line-height: 1.4; margin: 52px 0 16px; }
+p { margin: 0 0 16px; }
+strong { font-weight: 600; }
+a { color: var(--accent); text-underline-offset: 3px; }
+ul { padding-left: 1.3em; margin: 0 0 16px; }
+li { margin-bottom: 8px; }
+code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.88em; background: var(--code-bg); padding: 1px 6px; border-radius: 4px; }
+pre { background: var(--code-bg); border-radius: 10px; padding: 14px 18px; overflow-x: auto; margin: 0 0 18px; }
+pre code { background: none; padding: 0; font-size: 14px; line-height: 1.7; }
+.table-wrap { overflow-x: auto; margin: 4px 0 20px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+th, td { padding: 9px 10px; border-bottom: 1px solid var(--grid); text-align: left; white-space: nowrap; }
+th { color: var(--ink-2); font-weight: 600; border-bottom-color: var(--axis); }
+td.num, th.num { text-align: right; }
+tr.total td { font-weight: 600; border-top: 1px solid var(--axis); border-bottom: none; }
+mark.verify { background: var(--mark-bg); color: var(--mark-ink); font-size: 12px; line-height: 1; padding: 3px 6px; border-radius: 4px; margin: 0 2px; white-space: nowrap; vertical-align: 1px; }
+
+figure { margin: 28px 0 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px 18px 14px; }
+figure svg { display: block; width: 100%; height: auto; overflow: visible; }
+.fig-title { font-size: 15px; font-weight: 600; line-height: 1.5; margin: 0 0 2px; }
+.fig-sub { font-size: 13px; color: var(--ink-2); line-height: 1.6; margin: 0 0 14px; }
+figcaption { font-size: 13px; color: var(--muted); line-height: 1.6; margin-top: 12px; }
+
+svg text { font-family: system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", sans-serif; font-size: 13px; }
+svg .mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+.t-ink { fill: var(--ink); }
+.t-2 { fill: var(--ink-2); }
+.t-muted { fill: var(--muted); }
+.t-on { fill: #ffffff; }
+.t-b { font-weight: 600; }
+.grid { stroke: var(--grid); stroke-width: 1; }
+.ref { stroke: var(--axis); stroke-width: 1; }
+.axis { stroke: var(--axis); stroke-width: 1; }
+.bar { fill: var(--accent); }
+.bar-soft { fill: var(--accent-soft); }
+.bar:hover, .bar-soft:hover { opacity: 0.82; }
+.box { fill: var(--surface); stroke: var(--axis); stroke-width: 1; }
+.box-tint { fill: var(--accent-tint); stroke: var(--accent); stroke-width: 1; }
+.box-accent { fill: var(--accent); }
+.link { stroke: var(--muted); stroke-width: 1.5; fill: none; }
+.link-accent { stroke: var(--accent); stroke-width: 2; fill: none; }
+.ah-muted { fill: var(--muted); }
+.ah-accent { fill: var(--accent); }
+
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--ink-2); margin: 0 0 16px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.cov-group { margin: 0 0 16px; }
+.cov-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 14px; color: var(--ink-2); margin: 0 0 8px; }
+.cov-head b { color: var(--ink); font-weight: 600; }
+.cov-head em { font-style: normal; font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-size: 13px; line-height: 1; padding: 8px 10px; border-radius: 6px; }
+.chip.core { background: var(--accent); color: #fff; }
+.chip.tap { background: var(--tap); color: #fff; }
+.chip.none { color: var(--muted); box-shadow: inset 0 0 0 1px var(--axis); }
+.i-core { background: var(--accent); }
+.i-tap { background: var(--tap); }
+.i-none { box-shadow: inset 0 0 0 1px var(--axis); }
+
+.shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.shot { aspect-ratio: 4 / 3; border: 1.5px dashed var(--axis); border-radius: 10px; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--muted); font-size: 13px; line-height: 1.5; padding: 12px; }
+@media (max-width: 560px) {
+  .shots { grid-template-columns: 1fr; }
+  figure { padding: 16px 12px 12px; }
+}
+
+/* responsive figures */
+.hero { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.hero > div + div { border-left: 1px solid var(--grid); padding-left: 20px; }
+.hb { --lab: 104px; position: relative; padding-top: 24px; }
+.hb-ref { position: absolute; top: 0; bottom: 0; left: calc(var(--lab) + (100% - var(--lab)) * var(--p)); border-left: 1px solid var(--axis); }
+.hb-ref span { position: absolute; top: 0; left: 0; transform: translateX(-50%); font-size: 12px; line-height: 1; color: var(--ink-2); white-space: nowrap; background: var(--surface); padding: 0 3px; }
+.hb-row { position: relative; display: grid; grid-template-columns: var(--lab) 1fr; align-items: center; height: 30px; }
+.hb-name { font-size: 13px; text-align: right; padding-right: 10px; white-space: nowrap; }
+.hb-track { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.hb-bar { flex: none; height: 14px; min-width: 3px; background: var(--accent); border-radius: 0 4px 4px 0; }
+.hb-row:hover .hb-bar { opacity: 0.82; }
+.hb-val { font-size: 12px; color: var(--ink-2); white-space: nowrap; font-variant-numeric: tabular-nums; background: var(--surface); padding: 0 3px 0 0; }
+.vc { display: grid; grid-template-columns: repeat(4, 1fr); align-items: end; height: 190px; border-bottom: 1px solid var(--axis); }
+.vc-col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.vc-val { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.vc-col.hl .vc-val { color: var(--ink); font-weight: 600; }
+.vc-bar { width: 24px; border-radius: 4px 4px 0 0; background: var(--accent-soft); }
+.vc-col.hl .vc-bar { background: var(--accent); }
+.vc-cat { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; font-size: 12px; color: var(--ink-2); margin-top: 8px; }
+.flow { max-width: 420px; margin: 0 auto; }
+@media (max-width: 560px) {
+  .hero { grid-template-columns: 1fr; gap: 16px; }
+  .hero > div + div { border-left: none; padding-left: 0; border-top: 1px solid var(--grid); padding-top: 16px; }
+  .hb { --lab: 92px; }
+}
+
+}
+</style>
