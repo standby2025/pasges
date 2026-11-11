@@ -1,12 +1,17 @@
 ---
 import { SITE_TITLE } from '../consts';
 import { withBase } from '../lib/site';
+import { articleUI, themeUI, type Language } from '../lib/languages';
+interface Props { lang?: Language; }
+const { lang = 'zh' } = Astro.props;
+const ui = articleUI[lang];
+const themes = themeUI[lang];
 
 const path = Astro.url.pathname;
 const links = [
-	{ href: withBase('/'), label: '首页' },
-	{ href: withBase('/blog/'), label: '文章' },
-	{ href: withBase('/about/'), label: '关于' },
+	{ href: withBase('/'), label: ui.home },
+	{ href: withBase('/blog/'), label: ui.posts },
+	{ href: withBase('/about/'), label: ui.about },
 ];
 const isActive = (href: string) =>
 	href === withBase('/') ? path === href : path.startsWith(href);
@@ -18,14 +23,14 @@ const isActive = (href: string) =>
 		{links.map((l) => <a href={l.href} class:list={{ active: isActive(l.href) }}>{l.label}</a>)}
 	</nav>
  <label class="theme-picker">
-  <span>配色</span>
-  <select id="theme-select" aria-label="选择页面配色">
-   <option value="random">每次随机</option>
-   <option value="paper">暖纸 · 米白</option>
-   <option value="mist">晴雾 · 蓝灰</option>
-   <option value="forest">松林 · 浅绿</option>
-   <option value="rose">蔷薇 · 淡粉</option>
-   <option value="night">深海 · 夜色</option>
+  <span>{themes.label}</span>
+  <select id="theme-select" aria-label={themes.label}>
+   <option value="random">{themes.random}</option>
+   <option value="paper">{themes.paper}</option>
+   <option value="mist">{themes.mist}</option>
+   <option value="forest">{themes.forest}</option>
+   <option value="rose">{themes.rose}</option>
+   <option value="night">{themes.night}</option>
   </select>
  </label>
 </header>

@@ -5,7 +5,7 @@ import Header from '../../components/Header.astro';
 import PostList from '../../components/PostList.astro';
 import { getPosts } from '../../lib/site';
 
-const posts = await getPosts();
+const posts = await getPosts('zh');
 const years = [...new Set(posts.map((p) => p.data.pubDate.getFullYear()))];
 ---
 

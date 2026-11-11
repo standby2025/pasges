@@ -148,3 +148,13 @@ img {
 	letter-spacing: 0.12em;
 	color: var(--muted);
 }
+
+/* 独立图片保留自身可读背景，正文及阿拉伯文支持窄屏。 */
+.prose img { display: block; width: 100%; height: auto; margin-block: 1.5rem; border-radius: 10px; }
+.prose { overflow-wrap: anywhere; }
+.prose table { display: block; overflow-x: auto; }
+.prose[dir='rtl'] { text-align: right; }
+.prose pre, .prose code { direction: ltr; unicode-bidi: isolate; }
+.prose pre { text-align: left; }
+.prose[dir='rtl'] blockquote { border-left: 0; border-right: 3px solid var(--accent); }
+.prose[dir='rtl'] th, .prose[dir='rtl'] td { text-align: right; }

@@ -1,0 +1,45 @@
+{
+  "slug": "homebrew-ai-toolbox",
+  "importedAt": "2026-11-11",
+  "sourceLanguage": "zh",
+  "languages": [
+    "zh",
+    "en",
+    "fr",
+    "es",
+    "ru",
+    "ar"
+  ],
+  "originalFiles": [
+    {
+      "file": "source.html",
+      "sha256": "f5a9fa87f9e12ea363d35c67150076f47b7d6ac46c57b79d1a2b119966aae4e3"
+    },
+    {
+      "file": "source.zh.md",
+      "sha256": "b982018edf929e5f5b44658969322f05b1369bfca1b4e25806a87bd31435ff1a"
+    }
+  ],
+  "sourcePaths": [
+    "../a1/Homebrew-AI工具箱-成品.html",
+    "../a1/Homebrew-AI工具箱-成品-haiku.md"
+  ],
+  "displaySource": "src/content/blog/homebrew-ai-toolbox.<lang>.md",
+  "translation": {
+    "method": "Google Translate via public translation endpoint, cached; agent corrections to metadata, chart labels and table structure; not human reviewed",
+    "cache": "translations.json",
+    "preservation": "Every source paragraph, list, table, link and code block retained; code/URLs protected during translation."
+  },
+  "figures": {
+    "countPerLanguage": 7,
+    "format": "native SVG",
+    "localizedAssets": 42,
+    "method": "Redrawn from archived chart data. No HTML foreignObject or screenshots fabricated. Screenshot placeholders remain visibly labeled.",
+    "prompts": "src/assets/blog/homebrew-ai-toolbox/manifest.json"
+  },
+  "editorialPending": [
+    "Original fact-check markers retained and translated.",
+    "Original three missing product screenshots retained as one localized placeholder figure."
+  ],
+  "rebuild": "python3 scripts/import_homebrew.py (offline); --translate explicitly enables missing network translations"
+}

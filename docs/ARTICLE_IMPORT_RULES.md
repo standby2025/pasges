@@ -1,0 +1,52 @@
+# 文章导入与发布核心规则
+
+这是所有后续 agent 必须执行的项目规则。适用于新文章、重新导入及已有文章的修改；不能仅保留在对话里。
+
+## 1. Markdown 是展示内容的唯一来源
+
+- 每篇文章都必须保留可编辑的完整 Markdown 正文，存于 `src/content/blog/`。不能只保存 HTML、图片或摘要，不能以 HTML 包装进 `.md` 文件冒充 Markdown。
+- 原稿的标题层级、正文、列表、表格、代码、链接和数据必须完整保留。翻译不能用摘要替代。代码命令、项目名和链接不得被翻译损坏。
+- 正文不内嵌 `<svg>`、`<style>`、`<script>`、`<iframe>`、HTML 图表或 HTML 页面；使用标准 Markdown 图像语法插图。
+- 必须保留原稿中的「待核实」「截图待补」等编辑标记，除非已经完成有依据的修订。占位图须清楚标为占位图，不能伪造截图。
+
+## 2. 原始 HTML 只归档
+
+- 原版 HTML 原样保存在 `archives/articles/<slug>/source.html`，不放入 `public/` 或 `src/pages/`，不作为页面、iframe 或 HTML 正文来展示。
+- 同目录保存原始 Markdown（如果提供），以及 `manifest.json`，记录原文件、SHA-256、导入日期、翻译方式、语言、图表转换方式和编辑遗留项。
+- 归档是原始凭证，不允许生成脚本覆盖它。展示版由 Markdown 构建。
+
+## 3. 六种语言默认齐全
+
+- 联合国六种官方语言：`zh` 中文、`en` 英文、`fr` 法文、`es` 西班牙文、`ru` 俄文、`ar` 阿拉伯文。每次导入默认准备六种完整正文，无需再次询问。
+- 文件名用语言后缀：`<slug>.zh.md`、`<slug>.en.md`、`<slug>.fr.md`、`<slug>.es.md`、`<slug>.ru.md`、`<slug>.ar.md`。路由相应为 `/blog/<slug>.<lang>/`。
+- frontmatter 必须有 `lang`、相同的 `translationKey`、本地化的 `title`/`description`/`tags`，以及 `pubDate`。
+- 原文标 `translationStatus: original`；机器翻译标 `translationStatus: machine`，页面显示机器翻译提示。人工校对后才可标 `reviewed`。不能宣称机器翻译已经人工审核。
+- 保持原稿统计日期，不把历史数据写成当前实时数据。页面设置正确的 `lang`；阿拉伯文正文设置 `dir="rtl"`；命令保持从左到右。
+- 页内提供六种语言入口和 hreflang。首页和主文章列表以中文版本代表文章组，避免同一篇列六次；各语言版本都必须可直接访问。
+
+## 4. 图表必须作为独立图片插入
+
+- 使用顺序是 **SVG > WebP > PNG > JPEG**，是优先级，不是要求每张图导出四份。能精确表达的图表、流程图优先独立 SVG；照片优先 WebP；透明或无损位图可用 PNG；确实适合时才用 JPEG。
+- 不使用 SVG foreignObject 包住 HTML 充当图片。SVG 应包含原生图形和文本，不允许脚本、远程依赖或跟随页面的 HTML/CSS。
+- 图片放在 `src/assets/blog/<slug>/`，使用相对 Markdown 图片路径，兼容 GitHub Pages 子路径。
+- 文件名含语言后缀，如 `02-update-delay.fr.svg`。图片有文字时，必须翻译并重新排版生成各语言图片；不能让六种语言页面共用一张有中文文字的图。
+- 无文字或只有通用项目名、数字且语言无关的图片可以复用，但需在 manifest 里说明。
+- 阿拉伯文注意字形、阅读方向、标签对齐；俄文、法文等注意长词、换行、单位和小数。图表数据必须和正文、表格相同。
+- 原图不存在时，不得生成冒充真实产品的截图。可保留清楚标注的待补图片占位 SVG。
+
+## 5. 每张图的 alt 同时保存重建 prompt
+
+- 所有图表和图片都必须有非空 alt。alt 先清楚说明图的内容，再包含可以用于重建图片的 prompt。
+- prompt 至少写明：图表类型、布局、全部关键标签、数据/单位、文字语言、颜色、背景和必要的来源时间。不能只写「图表」「截图」或文件名。
+- alt/prompt 使用对应文章语言。Markdown 里的 `[]` 需转义，不能破坏图片语法。
+- 每份 SVG 同时内嵌 `<title>`/`<desc>` 保存内容及 prompt，并在资产清单保存 prompt 副本，便于审阅和再生成。
+
+## 6. 发布检查
+
+1. 检查六种 Markdown 均为完整正文，元信息、命令、链接和数据一致。
+2. 检查图片均存在，文字本地化，alt/prompt 完整，没有 inline HTML 图表或对归档 HTML 的展示依赖。
+3. 运行 `npm run validate:articles` 和 `npm run build`。
+4. 检查六种路由、语言切换、阿拉伯文方向、桌面/窄屏图片排版及 GitHub Pages base 路径。
+5. 提交源 Markdown、归档、所有本地化图片及清单；部署并确认线上文章可访问。
+
+现有例外：`hello-world.md` 是隐藏的模板草稿，无需六语翻译，不对外生成页面。正式文章不可使用此例外。

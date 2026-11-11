@@ -1,10 +1,18 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { languages } from './lib/languages';
 
 const blog = defineCollection({
-	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
+	loader: glob({
+		base: './src/content/blog',
+		pattern: '**/*.{md,mdx}',
+		generateId: ({ entry }) => entry.replace(/\.(md|mdx)$/, ''),
+	}),
 	schema: z.object({
+		lang: z.enum(languages).default('zh'),
+		translationKey: z.string().optional(),
+		translationStatus: z.enum(['original', 'machine', 'reviewed']).default('original'),
 		title: z.string(),
 		description: z.string(),
 		pubDate: z.coerce.date(),

@@ -1,14 +1,177 @@
----
-title: 别再挨个追新了：用 Homebrew 管好你 Mac 上的 AI 工具
-description: 用 Homebrew 统一安装、升级和管理 Mac 上的 AI 工具，附热门工具覆盖情况、更新时差统计与图形界面选择指南。
-pubDate: 2026-11-11
-tags: [Homebrew, AI 工具, macOS]
-draft: false
----
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>别再挨个追新了：用 Homebrew 管好你 Mac 上的 AI 工具</title>
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #898781;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11,11,11,0.10);
+  --accent: #2a78d6;
+  --accent-soft: #86b6ef;
+  --accent-tint: #eaf2fc;
+  --tap: #6250d6;
+  --code-bg: #f1f0ec;
+  --mark-bg: #fff1c7;
+  --mark-ink: #6b4a00;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --ink: #f0efec;
+    --ink-2: #c3c2b7;
+    --muted: #898781;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255,255,255,0.10);
+    --accent: #3987e5;
+    --accent-soft: #1c5cab;
+    --accent-tint: #15243a;
+    --tap: #7a6ee0;
+    --code-bg: #242422;
+    --mark-bg: #3a2f10;
+    --mark-ink: #f5d27a;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --ink: #f0efec;
+  --ink-2: #c3c2b7;
+  --muted: #898781;
+  --grid: #2c2c2a;
+  --axis: #383835;
+  --border: rgba(255,255,255,0.10);
+  --accent: #3987e5;
+  --accent-soft: #1c5cab;
+  --accent-tint: #15243a;
+  --tap: #7a6ee0;
+  --code-bg: #242422;
+  --mark-bg: #3a2f10;
+  --mark-ink: #f5d27a;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font: 17px/1.85 system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+article { max-width: 720px; margin: 0 auto; padding: 48px 16px 80px; }
+h1 { font-size: 30px; line-height: 1.35; margin: 0 0 10px; letter-spacing: -0.01em; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 36px; }
+h2 { font-size: 22px; line-height: 1.4; margin: 52px 0 16px; }
+p { margin: 0 0 16px; }
+strong { font-weight: 600; }
+a { color: var(--accent); text-underline-offset: 3px; }
+ul { padding-left: 1.3em; margin: 0 0 16px; }
+li { margin-bottom: 8px; }
+code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.88em; background: var(--code-bg); padding: 1px 6px; border-radius: 4px; }
+pre { background: var(--code-bg); border-radius: 10px; padding: 14px 18px; overflow-x: auto; margin: 0 0 18px; }
+pre code { background: none; padding: 0; font-size: 14px; line-height: 1.7; }
+.table-wrap { overflow-x: auto; margin: 4px 0 20px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+th, td { padding: 9px 10px; border-bottom: 1px solid var(--grid); text-align: left; white-space: nowrap; }
+th { color: var(--ink-2); font-weight: 600; border-bottom-color: var(--axis); }
+td.num, th.num { text-align: right; }
+tr.total td { font-weight: 600; border-top: 1px solid var(--axis); border-bottom: none; }
+mark.verify { background: var(--mark-bg); color: var(--mark-ink); font-size: 12px; line-height: 1; padding: 3px 6px; border-radius: 4px; margin: 0 2px; white-space: nowrap; vertical-align: 1px; }
 
-<div class="homebrew-article">
+figure { margin: 28px 0 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px 18px 14px; }
+figure svg { display: block; width: 100%; height: auto; overflow: visible; }
+.fig-title { font-size: 15px; font-weight: 600; line-height: 1.5; margin: 0 0 2px; }
+.fig-sub { font-size: 13px; color: var(--ink-2); line-height: 1.6; margin: 0 0 14px; }
+figcaption { font-size: 13px; color: var(--muted); line-height: 1.6; margin-top: 12px; }
 
+svg text { font-family: system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", sans-serif; font-size: 13px; }
+svg .mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+.t-ink { fill: var(--ink); }
+.t-2 { fill: var(--ink-2); }
+.t-muted { fill: var(--muted); }
+.t-on { fill: #ffffff; }
+.t-b { font-weight: 600; }
+.grid { stroke: var(--grid); stroke-width: 1; }
+.ref { stroke: var(--axis); stroke-width: 1; }
+.axis { stroke: var(--axis); stroke-width: 1; }
+.bar { fill: var(--accent); }
+.bar-soft { fill: var(--accent-soft); }
+.bar:hover, .bar-soft:hover { opacity: 0.82; }
+.box { fill: var(--surface); stroke: var(--axis); stroke-width: 1; }
+.box-tint { fill: var(--accent-tint); stroke: var(--accent); stroke-width: 1; }
+.box-accent { fill: var(--accent); }
+.link { stroke: var(--muted); stroke-width: 1.5; fill: none; }
+.link-accent { stroke: var(--accent); stroke-width: 2; fill: none; }
+.ah-muted { fill: var(--muted); }
+.ah-accent { fill: var(--accent); }
 
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--ink-2); margin: 0 0 16px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.cov-group { margin: 0 0 16px; }
+.cov-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 14px; color: var(--ink-2); margin: 0 0 8px; }
+.cov-head b { color: var(--ink); font-weight: 600; }
+.cov-head em { font-style: normal; font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-size: 13px; line-height: 1; padding: 8px 10px; border-radius: 6px; }
+.chip.core { background: var(--accent); color: #fff; }
+.chip.tap { background: var(--tap); color: #fff; }
+.chip.none { color: var(--muted); box-shadow: inset 0 0 0 1px var(--axis); }
+.i-core { background: var(--accent); }
+.i-tap { background: var(--tap); }
+.i-none { box-shadow: inset 0 0 0 1px var(--axis); }
+
+.shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.shot { aspect-ratio: 4 / 3; border: 1.5px dashed var(--axis); border-radius: 10px; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--muted); font-size: 13px; line-height: 1.5; padding: 12px; }
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  h1 { font-size: 25px; }
+  .shots { grid-template-columns: 1fr; }
+  figure { padding: 16px 12px 12px; }
+}
+
+/* responsive figures */
+.hero { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.hero > div + div { border-left: 1px solid var(--grid); padding-left: 20px; }
+.hb { --lab: 104px; position: relative; padding-top: 24px; }
+.hb-ref { position: absolute; top: 0; bottom: 0; left: calc(var(--lab) + (100% - var(--lab)) * var(--p)); border-left: 1px solid var(--axis); }
+.hb-ref span { position: absolute; top: 0; left: 0; transform: translateX(-50%); font-size: 12px; line-height: 1; color: var(--ink-2); white-space: nowrap; background: var(--surface); padding: 0 3px; }
+.hb-row { position: relative; display: grid; grid-template-columns: var(--lab) 1fr; align-items: center; height: 30px; }
+.hb-name { font-size: 13px; text-align: right; padding-right: 10px; white-space: nowrap; }
+.hb-track { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.hb-bar { flex: none; height: 14px; min-width: 3px; background: var(--accent); border-radius: 0 4px 4px 0; }
+.hb-row:hover .hb-bar { opacity: 0.82; }
+.hb-val { font-size: 12px; color: var(--ink-2); white-space: nowrap; font-variant-numeric: tabular-nums; background: var(--surface); padding: 0 3px 0 0; }
+.vc { display: grid; grid-template-columns: repeat(4, 1fr); align-items: end; height: 190px; border-bottom: 1px solid var(--axis); }
+.vc-col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.vc-val { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.vc-col.hl .vc-val { color: var(--ink); font-weight: 600; }
+.vc-bar { width: 24px; border-radius: 4px 4px 0 0; background: var(--accent-soft); }
+.vc-col.hl .vc-bar { background: var(--accent); }
+.vc-cat { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; font-size: 12px; color: var(--ink-2); margin-top: 8px; }
+.flow { max-width: 420px; margin: 0 auto; }
+@media (max-width: 560px) {
+  .hero { grid-template-columns: 1fr; gap: 16px; }
+  .hero > div + div { border-left: none; padding-left: 0; border-top: 1px solid var(--grid); padding-top: 16px; }
+  .hb { --lab: 92px; }
+}
+</style>
+</head>
+<body>
+<article>
+
+<h1>别再挨个追新了：用 Homebrew 管好你 Mac 上的 AI 工具</h1>
 <p class="meta">文中数据截至 2026 年 11 月 9 日</p>
 
 <p>前阵子你是不是跟着教程装了一堆 AI 工具？Claude Code、Ollama、Gemini CLI，一口气都上了。</p>
@@ -324,105 +487,6 @@ brew uninstall 名字</code></pre>
   <li><a href="https://en.wikipedia.org/wiki/Homebrew_(package_manager)">Homebrew 维基百科词条</a></li>
 </ul>
 
-
-</div>
-
-<style>
-.homebrew-article {
---surface: var(--code-bg); --ink-2: var(--muted); --grid: var(--line); --axis: var(--line); --border: var(--line); --accent-soft: color-mix(in srgb, var(--accent) 50%, var(--paper)); --accent-tint: var(--code-bg); --tap: #6250d6; --mark-bg: #fff1c7; --mark-ink: #6b4a00;
-.meta { color: var(--muted); font-size: 14px; margin: 0 0 36px; }
-h2 { font-size: 22px; line-height: 1.4; margin: 52px 0 16px; }
-p { margin: 0 0 16px; }
-strong { font-weight: 600; }
-a { color: var(--accent); text-underline-offset: 3px; }
-ul { padding-left: 1.3em; margin: 0 0 16px; }
-li { margin-bottom: 8px; }
-code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.88em; background: var(--code-bg); padding: 1px 6px; border-radius: 4px; }
-pre { background: var(--code-bg); border-radius: 10px; padding: 14px 18px; overflow-x: auto; margin: 0 0 18px; }
-pre code { background: none; padding: 0; font-size: 14px; line-height: 1.7; }
-.table-wrap { overflow-x: auto; margin: 4px 0 20px; }
-table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
-th, td { padding: 9px 10px; border-bottom: 1px solid var(--grid); text-align: left; white-space: nowrap; }
-th { color: var(--ink-2); font-weight: 600; border-bottom-color: var(--axis); }
-td.num, th.num { text-align: right; }
-tr.total td { font-weight: 600; border-top: 1px solid var(--axis); border-bottom: none; }
-mark.verify { background: var(--mark-bg); color: var(--mark-ink); font-size: 12px; line-height: 1; padding: 3px 6px; border-radius: 4px; margin: 0 2px; white-space: nowrap; vertical-align: 1px; }
-
-figure { margin: 28px 0 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px 18px 14px; }
-figure svg { display: block; width: 100%; height: auto; overflow: visible; }
-.fig-title { font-size: 15px; font-weight: 600; line-height: 1.5; margin: 0 0 2px; }
-.fig-sub { font-size: 13px; color: var(--ink-2); line-height: 1.6; margin: 0 0 14px; }
-figcaption { font-size: 13px; color: var(--muted); line-height: 1.6; margin-top: 12px; }
-
-svg text { font-family: system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", sans-serif; font-size: 13px; }
-svg .mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
-.t-ink { fill: var(--ink); }
-.t-2 { fill: var(--ink-2); }
-.t-muted { fill: var(--muted); }
-.t-on { fill: #ffffff; }
-.t-b { font-weight: 600; }
-.grid { stroke: var(--grid); stroke-width: 1; }
-.ref { stroke: var(--axis); stroke-width: 1; }
-.axis { stroke: var(--axis); stroke-width: 1; }
-.bar { fill: var(--accent); }
-.bar-soft { fill: var(--accent-soft); }
-.bar:hover, .bar-soft:hover { opacity: 0.82; }
-.box { fill: var(--surface); stroke: var(--axis); stroke-width: 1; }
-.box-tint { fill: var(--accent-tint); stroke: var(--accent); stroke-width: 1; }
-.box-accent { fill: var(--accent); }
-.link { stroke: var(--muted); stroke-width: 1.5; fill: none; }
-.link-accent { stroke: var(--accent); stroke-width: 2; fill: none; }
-.ah-muted { fill: var(--muted); }
-.ah-accent { fill: var(--accent); }
-
-.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--ink-2); margin: 0 0 16px; }
-.legend span { display: inline-flex; align-items: center; gap: 6px; }
-.legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
-.cov-group { margin: 0 0 16px; }
-.cov-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 14px; color: var(--ink-2); margin: 0 0 8px; }
-.cov-head b { color: var(--ink); font-weight: 600; }
-.cov-head em { font-style: normal; font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
-.chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.chip { font-size: 13px; line-height: 1; padding: 8px 10px; border-radius: 6px; }
-.chip.core { background: var(--accent); color: #fff; }
-.chip.tap { background: var(--tap); color: #fff; }
-.chip.none { color: var(--muted); box-shadow: inset 0 0 0 1px var(--axis); }
-.i-core { background: var(--accent); }
-.i-tap { background: var(--tap); }
-.i-none { box-shadow: inset 0 0 0 1px var(--axis); }
-
-.shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.shot { aspect-ratio: 4 / 3; border: 1.5px dashed var(--axis); border-radius: 10px; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--muted); font-size: 13px; line-height: 1.5; padding: 12px; }
-@media (max-width: 560px) {
-  .shots { grid-template-columns: 1fr; }
-  figure { padding: 16px 12px 12px; }
-}
-
-/* responsive figures */
-.hero { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.hero > div + div { border-left: 1px solid var(--grid); padding-left: 20px; }
-.hb { --lab: 104px; position: relative; padding-top: 24px; }
-.hb-ref { position: absolute; top: 0; bottom: 0; left: calc(var(--lab) + (100% - var(--lab)) * var(--p)); border-left: 1px solid var(--axis); }
-.hb-ref span { position: absolute; top: 0; left: 0; transform: translateX(-50%); font-size: 12px; line-height: 1; color: var(--ink-2); white-space: nowrap; background: var(--surface); padding: 0 3px; }
-.hb-row { position: relative; display: grid; grid-template-columns: var(--lab) 1fr; align-items: center; height: 30px; }
-.hb-name { font-size: 13px; text-align: right; padding-right: 10px; white-space: nowrap; }
-.hb-track { display: flex; align-items: center; gap: 6px; min-width: 0; }
-.hb-bar { flex: none; height: 14px; min-width: 3px; background: var(--accent); border-radius: 0 4px 4px 0; }
-.hb-row:hover .hb-bar { opacity: 0.82; }
-.hb-val { font-size: 12px; color: var(--ink-2); white-space: nowrap; font-variant-numeric: tabular-nums; background: var(--surface); padding: 0 3px 0 0; }
-.vc { display: grid; grid-template-columns: repeat(4, 1fr); align-items: end; height: 190px; border-bottom: 1px solid var(--axis); }
-.vc-col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.vc-val { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
-.vc-col.hl .vc-val { color: var(--ink); font-weight: 600; }
-.vc-bar { width: 24px; border-radius: 4px 4px 0 0; background: var(--accent-soft); }
-.vc-col.hl .vc-bar { background: var(--accent); }
-.vc-cat { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; font-size: 12px; color: var(--ink-2); margin-top: 8px; }
-.flow { max-width: 420px; margin: 0 auto; }
-@media (max-width: 560px) {
-  .hero { grid-template-columns: 1fr; gap: 16px; }
-  .hero > div + div { border-left: none; padding-left: 0; border-top: 1px solid var(--grid); padding-top: 16px; }
-  .hb { --lab: 92px; }
-}
-
-}
-</style>
+</article>
+</body>
+</html>

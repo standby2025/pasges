@@ -6,7 +6,7 @@ import PostList from '../components/PostList.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getPosts, withBase } from '../lib/site';
 
-const posts = (await getPosts()).slice(0, 8);
+const posts = (await getPosts('zh')).slice(0, 8);
 ---
 
 <!doctype html>

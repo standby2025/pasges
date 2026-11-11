@@ -1,0 +1,254 @@
+[
+  {
+    "file": "01-unified-management.zh.svg",
+    "lang": "zh",
+    "figure": 1,
+    "prompt": "对比流程图。左栏依次连接 curl 脚本到 Claude Code、官网 dmg 到 Ollama、npm 到 Gemini CLI；右栏由 Homebrew 和 brew upgrade 统一连接这三个工具。上方说明三套升级方式与一个入口的差别。 重建 prompt：制作独立原生 SVG 信息图，不含 HTML、脚本或远程依赖。白色背景，深蓝正文 #203047，蓝色图形 #275fa4，紫色区分项目 tap，灰色区分未收录。宽 1000 像素，高度随内容调整；标签清晰换行，不裁切；阿拉伯文使用从右向左文字排版。文字语言为 中文。"
+  },
+  {
+    "file": "02-update-delay.zh.svg",
+    "lang": "zh",
+    "figure": 2,
+    "prompt": "水平条形图，单位小时。OpenCode 0.5、uv 1.6、llama.cpp 1.6、Codex 1.8、Claude Code 3.5、Hermes Agent 6.7、OpenClaw 8.0、Ollama 25.0、Gemini CLI 26.8。统计区间 2026-08-11 至 2026-11-09；仅统计能匹配的版本，中位时差不是完整覆盖率。 重建 prompt：制作独立原生 SVG 信息图，不含 HTML、脚本或远程依赖。白色背景，深蓝正文 #203047，蓝色图形 #275fa4，紫色区分项目 tap，灰色区分未收录。宽 1000 像素，高度随内容调整；标签清晰换行，不裁切；阿拉伯文使用从右向左文字排版。文字语言为 中文。"
+  },
+  {
+    "file": "03-tool-coverage.zh.svg",
+    "lang": "zh",
+    "figure": 3,
+    "prompt": "项目覆盖矩阵。Agent 8/8：OpenClaw、DeepSeek Harness、Hermes Agent、OpenCode、Claude Code、Codex、Gemini CLI、Pi，均为官方仓库。本地模型 3/3：Ollama、llama.cpp、Whisper，均为官方仓库。其他工具 6/12：cc-switch、spec-kit、ComfyUI 桌面版、Open Design 为官方仓库；Orca、VoiceStudio 为项目 tap；claw-code、Stable Diffusion WebUI、Graphify、MoneyPrinterTurbo、Paperclip、RuView 未收录。总计 17/23，其中官方 15、tap 2。 重建 prompt：制作独立原生 SVG 信息图，不含 HTML、脚本或远程依赖。白色背景，深蓝正文 #203047，蓝色图形 #275fa4，紫色区分项目 tap，灰色区分未收录。宽 1000 像素，高度随内容调整；标签清晰换行，不裁切；阿拉伯文使用从右向左文字排版。文字语言为 中文。"
+  },
+  {
+    "file": "04-star-distribution.zh.svg",
+    "lang": "zh",
+    "figure": 4,
+    "prompt": "水平条形图，297 个 AI 相关包按 GitHub 星数分组：少于 1000 星 88 个，1000 至 1 万星 126 个，1 万至 10 万星 72 个，10 万星以上 11 个。按关键词粗略筛选，可能存在误判。 重建 prompt：制作独立原生 SVG 信息图，不含 HTML、脚本或远程依赖。白色背景，深蓝正文 #203047，蓝色图形 #275fa4，紫色区分项目 tap，灰色区分未收录。宽 1000 像素，高度随内容调整；标签清晰换行，不裁切；阿拉伯文使用从右向左文字排版。文字语言为 中文。"
+  },
+  {
+    "file": "05-install-counts.zh.svg",
+    "lang": "zh",
+    "figure": 5,
+    "prompt": "水平条形图，过去 30 天安装次数：Codex 351138、uv 206718、Ollama 62453、Claude Code 58378、OpenCode 45393、llama.cpp 35373。Ollama 只含命令行版，App 版另有 8975 次。数据截至 2026-11-09，只统计开启分析的用户。 重建 prompt：制作独立原生 SVG 信息图，不含 HTML、脚本或远程依赖。白色背景，深蓝正文 #203047，蓝色图形 #275fa4，紫色区分项目 tap，灰色区分未收录。宽 1000 像素，高度随内容调整；标签清晰换行，不裁切；阿拉伯文使用从右向左文字排版。文字语言为 中文。"
+  },
+  {
+    "file": "06-screenshot-placeholders.zh.svg",
+    "lang": "zh",
+    "figure": 6,
+    "prompt": "三张虚线边框占位卡片，分别标明 Homebrew.app 主界面、升级列表和对应命令提示截图待补。明确标为占位示意，不模仿或伪造真实界面。原稿版本 0.6.0，要求 macOS 26 及以上。 重建 prompt：制作独立原生 SVG 信息图，不含 HTML、脚本或远程依赖。白色背景，深蓝正文 #203047，蓝色图形 #275fa4，紫色区分项目 tap，灰色区分未收录。宽 1000 像素，高度随内容调整；标签清晰换行，不裁切；阿拉伯文使用从右向左文字排版。文字语言为 中文。"
+  },
+  {
+    "file": "07-gui-selection.zh.svg",
+    "lang": "zh",
+    "figure": 7,
+    "prompt": "选择指南，四行建议：macOS 26 或更新选择官方 Homebrew.app；较旧系统且只管理图形 App 选择 Applite；需要更细管理选择 Cork；喜欢终端选择 Bold Brew。保留原稿建议并注明以官方兼容性说明为准。 重建 prompt：制作独立原生 SVG 信息图，不含 HTML、脚本或远程依赖。白色背景，深蓝正文 #203047，蓝色图形 #275fa4，紫色区分项目 tap，灰色区分未收录。宽 1000 像素，高度随内容调整；标签清晰换行，不裁切；阿拉伯文使用从右向左文字排版。文字语言为 中文。"
+  },
+  {
+    "file": "01-unified-management.en.svg",
+    "lang": "en",
+    "figure": 1,
+    "prompt": "comparison flow chart. The left column connects the curl script to Claude Code, the official website dmg to Ollama, and npm to Gemini CLI in sequence; the right column consists of Homebrew and brew upgrade connects these three tools in a unified way. The above explains the difference between three sets of upgrade methods and one entrance. Rebuild prompt: Produce a standalone native SVG infographic without HTML, scripts or remote dependencies. White background, dark blue text #203047, blue graphics #275fa4, purple distinction item tap, gray distinction not included. Width 1000 pixels, the height is adjusted according to the content; labels are clearly wrapped and not cropped; Arabic text is typeset from right to left. The text language is English."
+  },
+  {
+    "file": "02-update-delay.en.svg",
+    "lang": "en",
+    "figure": 2,
+    "prompt": "Horizontal bar graph, unit hour. OpenCode 0.5, uv 1.6, llama.cpp 1.6, Codex 1.8, Claude Code 3.5, Hermes Agent 6.7, OpenClaw 8.0, Ollama 25.0, Gemini CLI 26.8. The statistical interval is 2026-08-11 to 2026-11-09; only matching versions are counted, and the median time difference is not complete coverage. Rebuild prompt: Produce a standalone native SVG infographic without HTML, scripts or remote dependencies. White background, dark blue text #203047, blue graphics #275fa4, purple distinction item tap, gray distinction not included. Width 1000 pixels, the height adjusts according to the content; labels are clearly wrapped and not cropped; Arabic text is typeset from right to left. The text language is English."
+  },
+  {
+    "file": "03-tool-coverage.en.svg",
+    "lang": "en",
+    "figure": 3,
+    "prompt": "project coverage matrix. Agent 8/8: OpenClaw, DeepSeek Harness, Hermes Agent, ZXQ KEEP0006QXZ, Claude Code, Codex, Gemini CLI, Pi are all official warehouses. Local models 3/3: Ollama, llama.cpp, Whisper, all are official warehouses. Other tools 6/12: cc-switch, spec-kit, ComfyUI desktop version, Open Design are official warehouses; Orca, VoiceStudio are projects tap; claw-code, Stable Diffusion WebUI, Graphify, MoneyPrinterTurbo, Paperclip, RuView are not included. Total 17/23, including official 15, tap and 2. Rebuild prompt: Produce a standalone native SVG infographic without HTML, scripts or remote dependencies. White background, dark blue text #203047, blue graphics #275fa4, purple distinction item tap, gray distinction not included. Width 1000 pixels, the height adjusts according to the content; labels are clearly wrapped and not cropped; Arabic text is typed from right to left. The text language is English."
+  },
+  {
+    "file": "04-star-distribution.en.svg",
+    "lang": "en",
+    "figure": 4,
+    "prompt": "horizontal bar chart, 297 AI related packages grouped by GitHub stars: less than 1000 stars 88, 1000 to 1 10,000 stars 126, 1 10,000 to 10 10,000 stars 72, 10 10,000 or more stars 11. Rough filtering by keywords may result in misjudgment. Rebuild prompt: Produce a standalone native SVG infographic without HTML, scripts or remote dependencies. White background, dark blue text #203047, blue graphics #275fa4, purple distinction item tap, gray distinction not included. Width 1000 pixels, the height adjusts according to the content; labels are clearly wrapped and not cropped; Arabic text is typeset from right to left. The text language is English."
+  },
+  {
+    "file": "05-install-counts.en.svg",
+    "lang": "en",
+    "figure": 5,
+    "prompt": "Horizontal bar chart, number of installs in the past 30 days: Codex 351138, uv 206718, Ollama 62453, Claude Code 58378, OpenCode 45393, llama.cpp 35373. Ollama only contains the command line version, and App version also has 8975 times. The data ends at 2026-11-09. Only users who enable analysis are counted. Rebuild prompt: Produce a standalone native SVG infographic without HTML, scripts or remote dependencies. White background, dark blue text #203047, blue graphics #275fa4, purple distinction item tap, gray distinction not included. Width 1000 pixels, the height adjusts according to the content; labels are clearly wrapped and not cropped; Arabic text is typed from right to left. The text language is English."
+  },
+  {
+    "file": "06-screenshot-placeholders.en.svg",
+    "lang": "en",
+    "figure": 6,
+    "prompt": "Three dotted border placeholder cards, respectively indicating the Homebrew.app main interface, upgrade list and corresponding command prompt screenshots to be added. It is clearly marked as a placeholder and does not imitate or fake the real interface. Manuscript version 0.6.0, requires macOS 26 and above. Rebuild prompt: Produce a standalone native SVG infographic without HTML, scripts or remote dependencies. White background, dark blue text #203047, blue graphics #275fa4, purple distinction item tap, gray distinction not included. Width 1000 pixels, the height adjusts according to the content; labels are clearly wrapped and not cropped; Arabic text is typeset from right to left. The text language is English."
+  },
+  {
+    "file": "07-gui-selection.en.svg",
+    "lang": "en",
+    "figure": 7,
+    "prompt": "selection guide, four lines of recommendations: macOS 26 or newer choose official Homebrew.app; older system and only manages graphics App choose Applite; need more detailed management selection Cork; prefer terminal selection Bold Brew. Keep the original suggestions and indicate that the official compatibility instructions shall prevail. Rebuild prompt: Produce a standalone native SVG infographic without HTML, scripts or remote dependencies. White background, dark blue text #203047, blue graphics #275fa4, purple distinction item tap, gray distinction not included. Width 1000 pixels, the height adjusts according to the content; labels are clearly wrapped and not cropped; Arabic text is typed from right to left. The text language is English."
+  },
+  {
+    "file": "01-unified-management.fr.svg",
+    "lang": "fr",
+    "figure": 1,
+    "prompt": ". La colonne de gauche connecte le script curl à Claude Code, le site officiel dmg à Ollama et npm à Gemini CLI dans l'ordre ; la colonne de droite se compose de Homebrew et brew upgrade connecte ces trois outils de manière unifiée. Ce qui précède explique la différence entre trois ensembles de méthodes de mise à niveau et une entrée. Reconstruisez prompt : produisez une infographie SVG native autonome sans HTML, scripts ou dépendances distantes. Fond blanc, texte bleu foncé #203047, graphiques bleus #275fa4, article de distinction violet tap, distinction grise non incluse. Largeur 1000 pixels, la hauteur est ajustée en fonction du contenu ; les étiquettes sont clairement emballées et non tronquées ; Le texte arabe est composé de droite à gauche. La langue du texte est français."
+  },
+  {
+    "file": "02-update-delay.fr.svg",
+    "lang": "fr",
+    "figure": 2,
+    "prompt": "Graphique à barres horizontales, unité heure. OpenCode 0.5, uv 1.6, llama.cpp 1.6, Codex 1.8, Claude Code 3.5, Hermes Agent 6.7, OpenClaw 8.0, Ollama 25.0, Gemini CLI 26.8. L'intervalle statistique va de 2026-08-11 à 2026-11-09 ; seules les versions correspondantes sont prises en compte et le décalage horaire médian ne constitue pas une couverture complète. Reconstruisez prompt : produisez une infographie SVG native autonome sans HTML, scripts ou dépendances distantes. Fond blanc, texte bleu foncé #203047, graphiques bleus #275fa4, article de distinction violet tap, distinction grise non incluse. Largeur 1000 pixels, la hauteur s'ajuste en fonction du contenu ; les étiquettes sont clairement emballées et non tronquées ; Le texte arabe est composé de droite à gauche. La langue du texte est français."
+  },
+  {
+    "file": "03-tool-coverage.fr.svg",
+    "lang": "fr",
+    "figure": 3,
+    "prompt": ". Agent 8/8 : OpenClaw, DeepSeek Harness, Hermes Agent, ZXQ KEEP0006QXZ, Claude Code, Codex, Gemini CLI, Pi sont tous des entrepôts officiels. Modèles locaux 3/3 : Ollama, llama.cpp, Whisper, tous sont des entrepôts officiels. Autres outils 6/12 : cc-switch, spec-kit, version de bureau ComfyUI, Open Design sont des entrepôts officiels ; Orca, VoiceStudio sont des projets tap ; claw-code, Stable Diffusion WebUI, Graphify, MoneyPrinterTurbo, Paperclip, RuView ne sont pas inclus. Total 17/23, y compris les 15 officiels, tap et 2. Reconstruisez prompt : produisez une infographie SVG native autonome sans HTML, scripts ou dépendances distantes. Fond blanc, texte bleu foncé #203047, graphiques bleus #275fa4, article de distinction violet tap, distinction grise non incluse. Largeur 1000 pixels, la hauteur s'ajuste en fonction du contenu ; les étiquettes sont clairement emballées et non tronquées ; Le texte arabe est tapé de droite à gauche. La langue du texte est français."
+  },
+  {
+    "file": "04-star-distribution.fr.svg",
+    "lang": "fr",
+    "figure": 4,
+    "prompt": ", packages associés 297 AI regroupés par étoiles GitHub : moins d'étoiles 1000 88, 1000 à 1 10 000 étoiles 126, 1 10 000 à 10 10 000 étoiles 72, 10 10 000 étoiles ou plus 11. Un filtrage approximatif par mots-clés peut entraîner une erreur de jugement. Reconstruisez prompt : produisez une infographie SVG native autonome sans HTML, scripts ou dépendances distantes. Fond blanc, texte bleu foncé #203047, graphiques bleus #275fa4, article de distinction violet tap, distinction grise non incluse. Largeur 1000 pixels, la hauteur s'ajuste en fonction du contenu ; les étiquettes sont clairement emballées et non tronquées ; Le texte arabe est composé de droite à gauche. La langue du texte est français."
+  },
+  {
+    "file": "05-install-counts.fr.svg",
+    "lang": "fr",
+    "figure": 5,
+    "prompt": "Graphique à barres horizontales, nombre d'installations au cours des derniers jours 30 : Codex 351138, uv 206718, Ollama 62453, Claude Code 58378, OpenCode 45393, llama.cpp 35373. Ollama contient uniquement la version en ligne de commande et la version App contient également des heures 8975. Les données se terminent à 2026-11-09. Seuls les utilisateurs qui activent l'analyse sont comptés. Reconstruisez prompt : produisez une infographie SVG native autonome sans HTML, scripts ou dépendances distantes. Fond blanc, texte bleu foncé #203047, graphiques bleus #275fa4, article de distinction violet tap, distinction grise non incluse. Largeur 1000 pixels, la hauteur s'ajuste en fonction du contenu ; les étiquettes sont clairement emballées et non tronquées ; Le texte arabe est tapé de droite à gauche. La langue du texte est français."
+  },
+  {
+    "file": "06-screenshot-placeholders.fr.svg",
+    "lang": "fr",
+    "figure": 6,
+    "prompt": "Trois cartes réservées à bordure en pointillés, indiquant respectivement l'interface principale de Homebrew.app, la liste de mise à niveau et les captures d'écran d'invite de commande correspondantes à ajouter. Il est clairement marqué comme un espace réservé et n’imite ni ne simule la véritable interface. La version manuscrite 0.6.0 nécessite macOS 26 et versions ultérieures. Reconstruisez prompt : produisez une infographie SVG native autonome sans HTML, scripts ou dépendances distantes. Fond blanc, texte bleu foncé #203047, graphiques bleus #275fa4, article de distinction violet tap, distinction grise non incluse. Largeur 1000 pixels, la hauteur s'ajuste en fonction du contenu ; les étiquettes sont clairement emballées et non tronquées ; Le texte arabe est composé de droite à gauche. La langue du texte est français."
+  },
+  {
+    "file": "07-gui-selection.fr.svg",
+    "lang": "fr",
+    "figure": 7,
+    "prompt": ", quatre lignes de recommandations : macOS 26 ou plus récent, choisissez le Homebrew.app officiel ; système plus ancien et ne gère que les graphiques App choisissez Applite ; besoin d'une sélection de gestion plus détaillée Cork ; préférez la sélection du terminal Bold Brew. Conservez les suggestions originales et indiquez que les instructions officielles de compatibilité prévaudront. Reconstruisez prompt : produisez une infographie SVG native autonome sans HTML, scripts ou dépendances distantes. Fond blanc, texte bleu foncé #203047, graphiques bleus #275fa4, article de distinction violet tap, distinction grise non incluse. Largeur 1000 pixels, la hauteur s'ajuste en fonction du contenu ; les étiquettes sont clairement emballées et non tronquées ; Le texte arabe est tapé de droite à gauche. La langue du texte est français."
+  },
+  {
+    "file": "01-unified-management.es.svg",
+    "lang": "es",
+    "figure": 1,
+    "prompt": ". La columna de la izquierda conecta el script curl con Claude Code, el sitio web oficial dmg con Ollama y npm con Gemini CLI en secuencia; la columna de la derecha consta de Homebrew y brew upgrade conecta estas tres herramientas de forma unificada. Lo anterior explica la diferencia entre tres conjuntos de métodos de actualización y una entrada. Reconstruir prompt: produzca una infografía nativa independiente de SVG sin HTML, scripts ni dependencias remotas. Fondo blanco, texto azul oscuro #203047, gráficos azules #275fa4, elemento de distinción violeta tap, distinción gris no incluida. Ancho 1000 píxeles, la altura se ajusta según el contenido; las etiquetas están claramente envueltas y no recortadas; El texto árabe está escrito de derecha a izquierda. El idioma del texto es español."
+  },
+  {
+    "file": "02-update-delay.es.svg",
+    "lang": "es",
+    "figure": 2,
+    "prompt": "Gráfico de barras horizontales, unidad hora. OpenCode 0.5, uv 1.6, llama.cpp 1.6, Codex 1.8, Claude Code 3.5, Hermes Agent 6.7, OpenClaw 8.0, Ollama 25.0, Gemini CLI 26.8. El intervalo estadístico es de 2026-08-11 a 2026-11-09; sólo se cuentan las versiones coincidentes y la diferencia horaria media no es una cobertura completa. Reconstruir prompt: produzca una infografía nativa independiente de SVG sin HTML, scripts ni dependencias remotas. Fondo blanco, texto azul oscuro #203047, gráficos azules #275fa4, elemento de distinción violeta tap, distinción gris no incluida. Ancho 1000 píxeles, la altura se ajusta según el contenido; las etiquetas están claramente envueltas y no recortadas; El texto árabe está escrito de derecha a izquierda. El idioma del texto es español."
+  },
+  {
+    "file": "03-tool-coverage.es.svg",
+    "lang": "es",
+    "figure": 3,
+    "prompt": ". Agent 8/8: OpenClaw, DeepSeek Harness, Hermes Agent, ZXQ KEEP0006QXZ, Claude Code, Codex, Gemini CLI, Pi son todos almacenes oficiales. Modelos locales 3/3: Ollama, llama.cpp, Whisper, todos son almacenes oficiales. Otras herramientas 6/12: cc-switch, spec-kit, ComfyUI versión de escritorio, Open Design son almacenes oficiales; Orca, VoiceStudio son proyectos tap; claw-code, Stable Diffusion WebUI, Graphify, MoneyPrinterTurbo, Paperclip, RuView no están incluidos. Total 17/23, incluidos 15, tap y 2 oficiales. Reconstruir prompt: produzca una infografía nativa independiente de SVG sin HTML, scripts ni dependencias remotas. Fondo blanco, texto azul oscuro #203047, gráficos azules #275fa4, elemento de distinción violeta tap, distinción gris no incluida. Ancho 1000 píxeles, la altura se ajusta según el contenido; las etiquetas están claramente envueltas y no recortadas; El texto árabe se escribe de derecha a izquierda. El idioma del texto es español."
+  },
+  {
+    "file": "04-star-distribution.es.svg",
+    "lang": "es",
+    "figure": 4,
+    "prompt": ", paquetes relacionados 297 AI agrupados por estrellas GitHub: menos de estrellas 1000 88, 1000 a 1 10,000 estrellas 126, 1 10,000 a 10 10,000 estrellas 72, 10 10,000 o más estrellas 11. Un filtrado aproximado por palabras clave puede dar lugar a errores de juicio. Reconstruir prompt: produzca una infografía nativa independiente de SVG sin HTML, scripts ni dependencias remotas. Fondo blanco, texto azul oscuro #203047, gráficos azules #275fa4, elemento de distinción violeta tap, distinción gris no incluida. Ancho 1000 píxeles, la altura se ajusta según el contenido; las etiquetas están claramente envueltas y no recortadas; El texto árabe está escrito de derecha a izquierda. El idioma del texto es español."
+  },
+  {
+    "file": "05-install-counts.es.svg",
+    "lang": "es",
+    "figure": 5,
+    "prompt": "Gráfico de barras horizontales, número de instalaciones en los últimos días 30: Codex 351138, uv 206718, Ollama 62453, Claude Code 58378, OpenCode 45393, llama.cpp 35373. Ollama solo contiene la versión de línea de comando, y la versión App también contiene tiempos 8975. Los datos terminan en 2026-11-09. Sólo se cuentan los usuarios que habilitan el análisis. Reconstruir prompt: produzca una infografía nativa independiente de SVG sin HTML, scripts ni dependencias remotas. Fondo blanco, texto azul oscuro #203047, gráficos azules #275fa4, elemento de distinción violeta tap, distinción gris no incluida. Ancho 1000 píxeles, la altura se ajusta según el contenido; las etiquetas están claramente envueltas y no recortadas; El texto árabe se escribe de derecha a izquierda. El idioma del texto es español."
+  },
+  {
+    "file": "06-screenshot-placeholders.es.svg",
+    "lang": "es",
+    "figure": 6,
+    "prompt": "Tres tarjetas de marcador de posición con borde de puntos, que indican respectivamente la interfaz principal Homebrew.app, la lista de actualizaciones y las capturas de pantalla del símbolo del sistema correspondientes que se agregarán. Está claramente marcado como marcador de posición y no imita ni falsifica la interfaz real. La versión manuscrita 0.6.0, requiere macOS 26 y superior. Reconstruir prompt: produzca una infografía nativa independiente de SVG sin HTML, scripts ni dependencias remotas. Fondo blanco, texto azul oscuro #203047, gráficos azules #275fa4, elemento de distinción violeta tap, distinción gris no incluida. Ancho 1000 píxeles, la altura se ajusta según el contenido; las etiquetas están claramente envueltas y no recortadas; El texto árabe está escrito de derecha a izquierda. El idioma del texto es español."
+  },
+  {
+    "file": "07-gui-selection.es.svg",
+    "lang": "es",
+    "figure": 7,
+    "prompt": ", cuatro líneas de recomendaciones: macOS 26 o más reciente, elija el Homebrew.app oficial; sistema antiguo y solo administra gráficos App elija Applite; necesita una selección de gestión más detallada Cork; Prefiera la selección de terminal Bold Brew. Mantener las sugerencias originales e indicar que prevalecerán las instrucciones oficiales de compatibilidad. Reconstruir prompt: produzca una infografía nativa independiente de SVG sin HTML, scripts ni dependencias remotas. Fondo blanco, texto azul oscuro #203047, gráficos azules #275fa4, elemento de distinción violeta tap, distinción gris no incluida. Ancho 1000 píxeles, la altura se ajusta según el contenido; las etiquetas están claramente envueltas y no recortadas; El texto árabe se escribe de derecha a izquierda. El idioma del texto es español."
+  },
+  {
+    "file": "01-unified-management.ru.svg",
+    "lang": "ru",
+    "figure": 1,
+    "prompt": ". Левый столбец последовательно соединяет скрипт curl с Claude Code, официальный сайт dmg с Ollama и npm с Gemini CLI; правый столбец состоит из Homebrew и brew. upgrade объединяет эти три инструмента унифицированным образом. Вышеизложенное объясняет разницу между тремя наборами методов обновления и одним входом. Перестроить prompt: создать автономную собственную инфографику SVG без HTML, сценариев или удаленных зависимостей. Белый фон, темно-синий текст #203047, синяя графика #275fa4, фиолетовый знак отличия tap, серый знак отличия не включен. Ширина 1000 пикселей, высота регулируется в зависимости от содержимого; этикетки четко завернуты и не обрезаны; Арабский текст набирается справа налево. Язык текста – русский."
+  },
+  {
+    "file": "02-update-delay.ru.svg",
+    "lang": "ru",
+    "figure": 2,
+    "prompt": "Горизонтальная гистограмма, единица измерения час. OpenCode 0.5, uv 1.6, llama.cpp 1.6, Codex 1.8, Claude Code 3.5, Hermes Agent 6.7, OpenClaw 8.0, Ollama 25.0, Gemini CLI 26.8. Статистический интервал: от 2026-08-11 до 2026-11-09; учитываются только совпадающие версии, а медианная разница во времени не является полным охватом. Перестроить prompt: создать автономную собственную инфографику SVG без HTML, сценариев или удаленных зависимостей. Белый фон, темно-синий текст #203047, синяя графика #275fa4, фиолетовый знак отличия tap, серый знак отличия не включен. Ширина 1000 пикселей, высота регулируется в зависимости от содержимого; этикетки четко завернуты и не обрезаны; Арабский текст набирается справа налево. Язык текста – русский."
+  },
+  {
+    "file": "03-tool-coverage.ru.svg",
+    "lang": "ru",
+    "figure": 3,
+    "prompt": "Матрица покрытия проекта. Agent 8/8: OpenClaw, DeepSeek Harness, Hermes Agent, ZXQ KEEP0006QXZ, Claude Code, Codex, Gemini CLI, Pi — все официальные склады. Локальные модели 3/3: Ollama, llama.cpp, Whisper, все являются официальными складами. Другие инструменты 6/12: cc-switch, spec-kit, настольная версия ComfyUI, Open Design находятся на официальных складах; Orca, VoiceStudio — проекты tap; claw-code, Stable Diffusion WebUI, Graphify, MoneyPrinterTurbo, Paperclip, RuView не включены. Всего 17/23, включая официальные 15, tap и 2. Пересобрать prompt: создать автономную собственную инфографику SVG без HTML, сценариев или удаленных зависимостей. Белый фон, темно-синий текст #203047, синяя графика #275fa4, фиолетовый знак отличия tap, серый знак отличия не включен. Ширина 1000 пикселей, высота регулируется в зависимости от содержимого; этикетки четко завернуты и не обрезаны; Арабский текст набирается справа налево. Язык текста – русский."
+  },
+  {
+    "file": "04-star-distribution.ru.svg",
+    "lang": "ru",
+    "figure": 4,
+    "prompt": ", 297 AI связанные пакеты, сгруппированные по звездочкам GitHub: менее звездочек 1000 88, 1000 до 1 10 000 звезд 126, 1 от 10 000 до 10 10 000 звезд 72, 10 10 000 или более звезд 11. Грубая фильтрация по ключевым словам может привести к ошибочным оценкам. Перестроить prompt: создать автономную собственную инфографику SVG без HTML, сценариев или удаленных зависимостей. Белый фон, темно-синий текст #203047, синяя графика #275fa4, фиолетовый знак отличия tap, серый знак отличия не включен. Ширина 1000 пикселей, высота регулируется в зависимости от содержимого; этикетки четко завернуты и не обрезаны; Арабский текст набирается справа налево. Язык текста – русский."
+  },
+  {
+    "file": "05-install-counts.ru.svg",
+    "lang": "ru",
+    "figure": 5,
+    "prompt": "Горизонтальная диаграмма, количество установок за последние 30 дни: Codex 351138, uv 206718, Ollama 62453, Claude Code 58378, OpenCode 45393, llama.cpp 35373. Ollama содержит только версию командной строки, а версия App также имеет время 8975. Данные заканчиваются на 2026-11-09. Учитываются только пользователи, включившие анализ. Перестроить prompt: создать автономную собственную инфографику SVG без HTML, сценариев или удаленных зависимостей. Белый фон, темно-синий текст #203047, синяя графика #275fa4, фиолетовый знак отличия tap, серый знак отличия не включен. Ширина 1000 пикселей, высота регулируется в зависимости от содержимого; этикетки четко завернуты и не обрезаны; Арабский текст набирается справа налево. Язык текста – русский."
+  },
+  {
+    "file": "06-screenshot-placeholders.ru.svg",
+    "lang": "ru",
+    "figure": 6,
+    "prompt": "Три карточки-заполнителя с пунктирной границей, обозначающие соответственно основной интерфейс Homebrew.app, список обновлений и соответствующие снимки экрана командной строки, которые необходимо добавить. Он четко обозначен как заполнитель и не имитирует и не подделывает реальный интерфейс. Рукописная версия 0.6.0 требует macOS 26 и выше. Перестроить prompt: создать автономную собственную инфографику SVG без HTML, сценариев или удаленных зависимостей. Белый фон, темно-синий текст #203047, синяя графика #275fa4, фиолетовый знак отличия tap, серый знак отличия не включен. Ширина 1000 пикселей, высота регулируется в зависимости от содержимого; этикетки четко завернуты и не обрезаны; Арабский текст набирается справа налево. Язык текста – русский."
+  },
+  {
+    "file": "07-gui-selection.ru.svg",
+    "lang": "ru",
+    "figure": 7,
+    "prompt": ", четыре строки рекомендаций: macOS 26 или новее выберите официальный Homebrew.app; более старая система и управляет только графикой App, выберите Applite; нужен более подробный выбор управления Cork; предпочитайте выбор клеммы Bold Brew. Сохраните оригинальные предложения и укажите, что официальные инструкции по совместимости имеют преимущественную силу. Перестроить prompt: создать автономную собственную инфографику SVG без HTML, сценариев или удаленных зависимостей. Белый фон, темно-синий текст #203047, синяя графика #275fa4, фиолетовый знак отличия tap, серый знак отличия не включен. Ширина 1000 пикселей, высота регулируется в зависимости от содержимого; этикетки четко завернуты и не обрезаны; Арабский текст набирается справа налево. Язык текста – русский."
+  },
+  {
+    "file": "01-unified-management.ar.svg",
+    "lang": "ar",
+    "figure": 1,
+    "prompt": "مخطط مقارنة بعمودين. في العمود الأيمن يتصل نص curl بـ Claude Code وملف dmg من الموقع الرسمي بـ Ollama وnpm بـ Gemini CLI، مع ثلاث طرق مستقلة للترقية. في العمود الأيسر يدير Homebrew والأمر brew upgrade الأدوات الثلاث من نقطة واحدة. وضّح الفرق بين ثلاث طرق للترقية ومدخل موحد. تعليمات إعادة الإنشاء: أنشئ رسماً معلوماتياً مستقلاً بصيغة SVG أصلية، دون HTML أو نصوص برمجية أو اعتماد على موارد خارجية. خلفية بيضاء، ونص أزرق داكن #203047، وأشكال زرقاء #275fa4، وبنفسجي لمستودعات tap الخاصة بالمشاريع، ورمادي للمشاريع غير المدرجة. العرض 1000 بكسل، والارتفاع حسب المحتوى. لفّ التسميات بوضوح دون قصها، واستخدم اتجاه الكتابة من اليمين إلى اليسار. لغة النص: العربية."
+  },
+  {
+    "file": "02-update-delay.ar.svg",
+    "lang": "ar",
+    "figure": 2,
+    "prompt": "مخطط أشرطة أفقي لوسيط التأخر بالساعات: OpenCode 0.5، uv 1.6، llama.cpp 1.6، Codex 1.8، Claude Code 3.5، Hermes Agent 6.7، OpenClaw 8.0، Ollama 25.0، Gemini CLI 26.8. فترة البيانات من 2026-08-11 إلى 2026-11-09. تشمل الإصدارات التي أمكن مطابقتها فقط، ولا يمثل الوسيط معدل التغطية الكامل. تعليمات إعادة الإنشاء: أنشئ رسماً معلوماتياً مستقلاً بصيغة SVG أصلية، دون HTML أو نصوص برمجية أو اعتماد على موارد خارجية. خلفية بيضاء، ونص أزرق داكن #203047، وأشكال زرقاء #275fa4، وبنفسجي لمستودعات tap الخاصة بالمشاريع، ورمادي للمشاريع غير المدرجة. العرض 1000 بكسل، والارتفاع حسب المحتوى. لفّ التسميات بوضوح دون قصها، واستخدم اتجاه الكتابة من اليمين إلى اليسار. لغة النص: العربية."
+  },
+  {
+    "file": "03-tool-coverage.ar.svg",
+    "lang": "ar",
+    "figure": 3,
+    "prompt": "مصفوفة تغطية المشاريع. الوكلاء ومساعدو البرمجة 8/8: OpenClaw وDeepSeek Harness وHermes Agent وOpenCode وClaude Code وCodex وGemini CLI وPi، وجميعها في المستودع الرسمي. النماذج المحلية 3/3: Ollama وllama.cpp وWhisper، وجميعها رسمية. الأدوات الأخرى 6/12: cc-switch وspec-kit ونسخة ComfyUI لسطح المكتب وOpen Design رسمية؛ Orca وVoiceStudio في tap خاص بالمشروع؛ claw-code وStable Diffusion WebUI وGraphify وMoneyPrinterTurbo وPaperclip وRuView غير مدرجة. الإجمالي 17/23، منها 15 رسمية و2 في tap. تعليمات إعادة الإنشاء: أنشئ رسماً معلوماتياً مستقلاً بصيغة SVG أصلية، دون HTML أو نصوص برمجية أو اعتماد على موارد خارجية. خلفية بيضاء، ونص أزرق داكن #203047، وأشكال زرقاء #275fa4، وبنفسجي لمستودعات tap الخاصة بالمشاريع، ورمادي للمشاريع غير المدرجة. العرض 1000 بكسل، والارتفاع حسب المحتوى. لفّ التسميات بوضوح دون قصها، واستخدم اتجاه الكتابة من اليمين إلى اليسار. لغة النص: العربية."
+  },
+  {
+    "file": "04-star-distribution.ar.svg",
+    "lang": "ar",
+    "figure": 4,
+    "prompt": "مخطط أشرطة أفقي لتوزيع 297 حزمة مرتبطة بالذكاء الاصطناعي حسب نجوم GitHub: أقل من 1000 نجمة 88 حزمة؛ من 1000 إلى 10000 نجمة 126؛ من 10000 إلى 100000 نجمة 72؛ أكثر من 100000 نجمة 11. يعتمد الفرز على كلمات مفتاحية تقريبية وقد يتضمن أخطاء. تعليمات إعادة الإنشاء: أنشئ رسماً معلوماتياً مستقلاً بصيغة SVG أصلية، دون HTML أو نصوص برمجية أو اعتماد على موارد خارجية. خلفية بيضاء، ونص أزرق داكن #203047، وأشكال زرقاء #275fa4، وبنفسجي لمستودعات tap الخاصة بالمشاريع، ورمادي للمشاريع غير المدرجة. العرض 1000 بكسل، والارتفاع حسب المحتوى. لفّ التسميات بوضوح دون قصها، واستخدم اتجاه الكتابة من اليمين إلى اليسار. لغة النص: العربية."
+  },
+  {
+    "file": "05-install-counts.ar.svg",
+    "lang": "ar",
+    "figure": 5,
+    "prompt": "مخطط أشرطة أفقي لعمليات التثبيت خلال آخر 30 يوماً: Codex 351138، uv 206718، Ollama 62453، Claude Code 58378، OpenCode 45393، llama.cpp 35373. تشمل قيمة Ollama أداة سطر الأوامر فقط، مع 8975 عملية إضافية للتطبيق. البيانات حتى 2026-11-09، وتشمل المستخدمين الذين فعّلوا التحليلات فقط. تعليمات إعادة الإنشاء: أنشئ رسماً معلوماتياً مستقلاً بصيغة SVG أصلية، دون HTML أو نصوص برمجية أو اعتماد على موارد خارجية. خلفية بيضاء، ونص أزرق داكن #203047، وأشكال زرقاء #275fa4، وبنفسجي لمستودعات tap الخاصة بالمشاريع، ورمادي للمشاريع غير المدرجة. العرض 1000 بكسل، والارتفاع حسب المحتوى. لفّ التسميات بوضوح دون قصها، واستخدم اتجاه الكتابة من اليمين إلى اليسار. لغة النص: العربية."
+  },
+  {
+    "file": "06-screenshot-placeholders.ar.svg",
+    "lang": "ar",
+    "figure": 6,
+    "prompt": "ثلاث بطاقات بديلة بحدود متقطعة، تشير إلى أن لقطات الشاشة الرئيسية لـ Homebrew.app وقائمة الترقيات وتلميحات الأوامر المقابلة لم تُضف بعد. وضّح أنها عناصر نائبة وليست صوراً حقيقية للمنتج، ولا تقلّد واجهته. يذكر النص الأصلي الإصدار 0.6.0 والحاجة إلى macOS 26 أو أحدث. تعليمات إعادة الإنشاء: أنشئ رسماً معلوماتياً مستقلاً بصيغة SVG أصلية، دون HTML أو نصوص برمجية أو اعتماد على موارد خارجية. خلفية بيضاء، ونص أزرق داكن #203047، وأشكال زرقاء #275fa4، وبنفسجي لمستودعات tap الخاصة بالمشاريع، ورمادي للمشاريع غير المدرجة. العرض 1000 بكسل، والارتفاع حسب المحتوى. لفّ التسميات بوضوح دون قصها، واستخدم اتجاه الكتابة من اليمين إلى اليسار. لغة النص: العربية."
+  },
+  {
+    "file": "07-gui-selection.ar.svg",
+    "lang": "ar",
+    "figure": 7,
+    "prompt": "دليل اختيار من أربعة أسطر: على macOS 26 أو أحدث اختر Homebrew.app الرسمي؛ على نظام أقدم مع إدارة التطبيقات الرسومية فقط اختر Applite؛ للإدارة التفصيلية اختر Cork؛ لمحبي الطرفية اختر Bold Brew. حافظ على توصيات الأصل وأشر إلى الرجوع إلى معلومات التوافق الرسمية. تعليمات إعادة الإنشاء: أنشئ رسماً معلوماتياً مستقلاً بصيغة SVG أصلية، دون HTML أو نصوص برمجية أو اعتماد على موارد خارجية. خلفية بيضاء، ونص أزرق داكن #203047، وأشكال زرقاء #275fa4، وبنفسجي لمستودعات tap الخاصة بالمشاريع، ورمادي للمشاريع غير المدرجة. العرض 1000 بكسل، والارتفاع حسب المحتوى. لفّ التسميات بوضوح دون قصها، واستخدم اتجاه الكتابة من اليمين إلى اليسار. لغة النص: العربية."
+  }
+]
