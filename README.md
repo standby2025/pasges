@@ -10,7 +10,7 @@
 
 图表优先用独立 SVG，其次 WebP、PNG、JPEG。图中文字须随文章语言重新出图，每张图的 alt 保存内容描述和重建 prompt。图片放 `src/assets/blog/<slug>/`，原始 HTML 只保存在 `archives/articles/<slug>/`，不作为展示来源。
 
-首页展示中文文章组；文章页提供六语入口，阿拉伯文支持 RTL。机器翻译版本会明确标记，校对后才可改为 `reviewed`。
+全站首页、文章目录、关于页、导航、页脚、配色菜单和 RSS 都有六语版本；每种目录只显示当前语言文章。中文保留根路径，其他语言使用 `/en/`、`/fr/`、`/es/`、`/ru/`、`/ar/`，文章仍用 `.en` 等后缀。页头语言选择保留当前页面并记录浏览器偏好，阿拉伯文全站支持 RTL。机器翻译版本会明确标记，校对后才可改为 `reviewed`。
 
 ```bash
 npm install
@@ -19,7 +19,7 @@ npm run validate:articles # 核查六语、图片、alt prompt 和原始归档
 npm run build    # 先校验，再构建到 dist/
 ```
 
-站点名、简介、作者、GitHub 链接在 `src/consts.ts`;关于页在 `src/pages/about.astro`;配色在 `src/styles/global.css` 顶部变量。
+中文站点名、简介、作者、GitHub 链接在 `src/consts.ts`；各语言站点文案和关于页文字集中在 `src/lib/languages.ts`；共享页面由 `src/components/SitePage.astro` 渲染；配色在 `src/styles/global.css` 顶部变量。
 
 ## 发布:push tag 触发
 

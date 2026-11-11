@@ -1,22 +1,24 @@
 ---
 import '../styles/global.css';
-import { SITE_TITLE } from '../consts';
-import { withBase } from '../lib/site';
+import { siteUI, type Language } from '../lib/languages';
+import { localePath, withBase } from '../lib/site';
 
 interface Props {
 	title: string;
 	description: string;
+ lang?: Language;
 }
-const { title, description } = Astro.props;
+const { title, description, lang = 'zh' } = Astro.props;
+const siteTitle = siteUI[lang].title;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const fullTitle = title === SITE_TITLE ? title : `${title} · ${SITE_TITLE}`;
+const fullTitle = title === siteTitle ? title : `${title} · ${siteTitle}`;
 ---
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
 <link rel="sitemap" href={withBase('sitemap-index.xml')} />
-<link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href={withBase('rss.xml')} />
+<link rel="alternate" type="application/rss+xml" title={siteTitle} href={localePath(lang, 'rss.xml')} />
 <link rel="canonical" href={canonicalURL} />
 <meta name="generator" content={Astro.generator} />
 <title>{fullTitle}</title>

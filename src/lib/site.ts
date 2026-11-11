@@ -12,3 +12,8 @@ export async function getPosts(lang?: Language) {
 	const posts = await getCollection('blog', ({ data }) => !data.draft && (!lang || data.lang === lang));
 	return posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 }
+
+/** Global pages use locale prefixes; Chinese keeps the existing root URLs. */
+export function localePath(lang: Language, path = '/') {
+ return withBase(`${lang === 'zh' ? '' : `/${lang}`}/${path.replace(/^\//, '')}`);
+}

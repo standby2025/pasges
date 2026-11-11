@@ -22,7 +22,10 @@
 - frontmatter 必须有 `lang`、相同的 `translationKey`、本地化的 `title`/`description`/`tags`，以及 `pubDate`。
 - 原文标 `translationStatus: original`；机器翻译标 `translationStatus: machine`，页面显示机器翻译提示。人工校对后才可标 `reviewed`。不能宣称机器翻译已经人工审核。
 - 保持原稿统计日期，不把历史数据写成当前实时数据。页面设置正确的 `lang`；阿拉伯文正文设置 `dir="rtl"`；命令保持从左到右。
-- 页内提供六种语言入口和 hreflang。首页和主文章列表以中文版本代表文章组，避免同一篇列六次；各语言版本都必须可直接访问。
+- 多语言是全站框架能力，不仅限于文章。首页、文章目录、关于页、导航、页脚、日期、配色菜单、页面标题/简介和 RSS 都必须本地化；禁止从非中文文章导航回中文目录。
+- 中文全站入口保留根路径；其他语言使用 `/en/`、`/fr/`、`/es/`、`/ru/`、`/ar/`，例如 `/en/blog/`、`/ar/about/`。文章仍保持 `.en`、`.ar` 等语言后缀。
+- 页头是全站语言选择器，切换时保留页面类型（首页/目录/关于）或同一篇文章。选择保存至浏览器 `blog-language`；再次进入根首页时应用已保存偏好。显式语言链接优先于偏好，不自动改写直接访问的文章或其他语言地址。
+- 文章目录和首页仅列当前语言的文章，每篇只出现一次。页面提供 hreflang，RSS 按语言分开输出；阿拉伯文的整个页面包含页头/目录/页脚都使用 RTL。
 
 ## 4. 图表必须作为独立图片插入
 
@@ -45,7 +48,7 @@
 
 1. 检查六种 Markdown 均为完整正文，元信息、命令、链接和数据一致。
 2. 检查图片均存在，文字本地化，alt/prompt 完整，没有 inline HTML 图表或对归档 HTML 的展示依赖。
-3. 运行 `npm run validate:articles` 和 `npm run build`。
+3. 运行 `npm run validate:articles` 和 `npm run build`。构建还会自动运行 `validate:i18n`，检查18个全站页面和6份RSS的语言、方向、导航、文章列表和hreflang。
 4. 检查六种路由、语言切换、阿拉伯文方向、桌面/窄屏图片排版及 GitHub Pages base 路径。
 5. 提交源 Markdown、归档、所有本地化图片及清单；部署并确认线上文章可访问。
 

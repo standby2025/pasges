@@ -7,10 +7,11 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "npm run validate:articles && astro build",
+    "build": "npm run validate:articles && astro build && npm run validate:i18n",
     "preview": "astro preview",
     "astro": "astro",
-    "validate:articles": "node scripts/validate-articles.mjs"
+    "validate:articles": "node scripts/validate-articles.mjs",
+    "validate:i18n": "node scripts/validate-i18n-build.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.1.3",

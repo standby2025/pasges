@@ -1,18 +1,4 @@
-import rss from '@astrojs/rss';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-import { getPosts, withBase } from '../lib/site';
-
+import { createFeed } from '../lib/feed';
 export async function GET(context) {
-	const posts = await getPosts();
-	return rss({
-		title: SITE_TITLE,
-		description: SITE_DESCRIPTION,
-		site: context.site,
-		items: posts.map((post) => ({
-			title: post.data.title,
-			description: post.data.description,
-			pubDate: post.data.pubDate,
-			link: withBase(`/blog/${post.id}/`),
-		})),
-	});
+ return createFeed('zh', context.site);
 }

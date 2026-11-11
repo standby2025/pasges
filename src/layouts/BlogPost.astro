@@ -21,12 +21,12 @@ const direction = lang === 'ar' ? 'rtl' : 'ltr';
 <!doctype html>
 <html lang={localeNames[lang]} dir={direction}>
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description} lang={lang} />
   {translations.map((post) => <link rel="alternate" hreflang={post.data.lang} href={new URL(withBase(`/blog/${post.id}/`), Astro.site)} />)}
   {translationKey && <link rel="alternate" hreflang="x-default" href={new URL(withBase(`/blog/${translationKey}.zh/`), Astro.site)} />}
 	</head>
 	<body>
-		<Header lang={lang} />
+		<Header lang={lang} languageLinks={translations.map((post) => ({ lang: post.data.lang, href: withBase(`/blog/${post.id}/`) }))} />
 		<main>
 			<article>
 				<header class="post-head">
@@ -39,14 +39,14 @@ const direction = lang === 'ar' ? 'rtl' : 'ltr';
 				</header>
     {translations.length > 1 && <nav class="language-switch" aria-label={ui.languages}>
      {translations.sort((a, b) => ['zh', 'en', 'fr', 'es', 'ru', 'ar'].indexOf(a.data.lang) - ['zh', 'en', 'fr', 'es', 'ru', 'ar'].indexOf(b.data.lang)).map((post) => (
-      <a href={withBase(`/blog/${post.id}/`)} lang={post.data.lang} hreflang={post.data.lang} aria-current={post.data.lang === lang ? 'page' : undefined}>{languageNames[post.data.lang]}</a>
+      <a href={withBase(`/blog/${post.id}/`)} lang={post.data.lang} hreflang={post.data.lang} data-language={post.data.lang} aria-current={post.data.lang === lang ? 'page' : undefined}>{languageNames[post.data.lang]}</a>
      ))}
     </nav>}
     {translationStatus === 'machine' && <p class="translation-note">{ui.machine}</p>}
 				<div class="prose" lang={lang} dir={direction}><slot /></div>
 			</article>
 		</main>
-		<Footer />
+		<Footer lang={lang} />
 	</body>
 </html>
 

@@ -1,0 +1,9 @@
+---
+import SitePage from '../../components/SitePage.astro';
+import { languages, type Language } from '../../lib/languages';
+export function getStaticPaths() {
+ return languages.filter((lang) => lang !== 'zh').map((lang) => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as Language;
+---
+<SitePage kind="home" lang={lang} />

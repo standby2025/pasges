@@ -1,0 +1,59 @@
+---
+import BaseHead from './BaseHead.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import PostList from './PostList.astro';
+import { languages, localeNames, articleUI, siteUI, type Language } from '../lib/languages';
+import { getPosts, localePath } from '../lib/site';
+interface Props { lang?: Language; kind: 'home' | 'blog' | 'about'; }
+const { lang = 'zh', kind } = Astro.props;
+const ui = siteUI[lang];
+const posts = kind === 'about' ? [] : await getPosts(lang);
+const years = [...new Set(posts.map((post) => post.data.pubDate.getFullYear()))];
+const path = kind === 'home' ? '/' : `/${kind}/`;
+const title = kind === 'home' ? ui.title : articleUI[lang][kind === 'blog' ? 'posts' : 'about'];
+const description = kind === 'home' ? ui.description : kind === 'blog' ? ui.archive : ui.aboutDescription;
+const languageLinks = languages.map((language) => ({ lang: language, href: localePath(language, path) }));
+const homeTargets = Object.fromEntries(languages.map((language) => [language, localePath(language)]));
+---
+<!doctype html>
+<html lang={localeNames[lang]} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+ <head>
+  <BaseHead title={title} description={description} lang={lang} />
+  {languageLinks.map((link) => <link rel="alternate" hreflang={link.lang} href={new URL(link.href, Astro.site)} />)}
+  <link rel="alternate" hreflang="x-default" href={new URL(localePath('zh', path), Astro.site)} />
+  {kind === 'home' && lang === 'zh' && <script is:inline define:vars={{ homeTargets }}>
+   try {
+    const saved = localStorage.getItem('blog-language');
+    if (saved && saved !== 'zh' && homeTargets[saved]) location.replace(homeTargets[saved]);
+   } catch {}
+  </script>}
+ </head>
+ <body>
+  <Header lang={lang} languageLinks={languageLinks} />
+  <main>
+   {kind === 'home' ? <>
+    <section class="intro"><h1>{ui.title}</h1><p>{ui.description}</p></section>
+    <h2 class="section-title">{ui.recent}</h2>
+    <PostList posts={posts.slice(0, 8)} lang={lang} />
+    {posts.length === 0 && <p>{ui.empty}</p>}
+    <p><a href={localePath(lang, '/blog/')}>{ui.all} <span aria-hidden="true">{lang === 'ar' ? '←' : '→'}</span></a></p>
+   </> : kind === 'blog' ? <>
+    <h1>{title}</h1>
+    {years.map((year) => <section class="year-group">
+     <h2 class="section-title">{new Intl.DateTimeFormat(localeNames[lang], { year: 'numeric', timeZone: 'UTC' }).format(new Date(Date.UTC(year, 0, 1)))}</h2>
+     <PostList posts={posts.filter((post) => post.data.pubDate.getFullYear() === year)} lang={lang} />
+    </section>)}
+    {posts.length === 0 && <p>{ui.empty}</p>}
+   </> : <article class="prose"><h1>{title}</h1><p>{ui.aboutText}</p><p>{ui.contactText}</p></article>}
+  </main>
+  <Footer lang={lang} />
+ </body>
+</html>
+<style>
+ h1 { margin: 0 0 1rem; font-size: 2.2rem; }
+ .intro { margin-bottom: 2.5rem; }
+ .intro h1 { margin-bottom: .5rem; }
+ .intro p { margin: 0; color: var(--muted); font-size: 1.05rem; }
+ .year-group { margin-bottom: 1.5rem; }
+</style>

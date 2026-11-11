@@ -1,27 +1,34 @@
 ---
-import { SITE_TITLE } from '../consts';
-import { withBase } from '../lib/site';
-import { articleUI, themeUI, type Language } from '../lib/languages';
-interface Props { lang?: Language; }
-const { lang = 'zh' } = Astro.props;
+import { localePath } from '../lib/site';
+import { articleUI, themeUI, siteUI, languages, languageNames, type Language } from '../lib/languages';
+interface Props { lang?: Language; languageLinks?: { lang: Language; href: string }[]; }
+const { lang = 'zh', languageLinks = languages.map((language) => ({ lang: language, href: localePath(language) })) } = Astro.props;
+const site = siteUI[lang];
 const ui = articleUI[lang];
 const themes = themeUI[lang];
 
 const path = Astro.url.pathname;
 const links = [
-	{ href: withBase('/'), label: ui.home },
-	{ href: withBase('/blog/'), label: ui.posts },
-	{ href: withBase('/about/'), label: ui.about },
+	{ href: localePath(lang, '/'), label: ui.home },
+	{ href: localePath(lang, '/blog/'), label: ui.posts },
+	{ href: localePath(lang, '/about/'), label: ui.about },
 ];
 const isActive = (href: string) =>
-	href === withBase('/') ? path === href : path.startsWith(href);
+	href === localePath(lang, '/') ? path === href : path.startsWith(href) || (href === localePath(lang, '/blog/') && /\/blog\/[^/]+\/?$/.test(path));
 ---
 
 <header class="site-header">
-	<a class="brand" href={withBase('/')}>{SITE_TITLE}</a>
-	<nav>
+	<a class="brand" href={localePath(lang, '/')}>{site.title}</a>
+	<nav aria-label={site.navigation}>
 		{links.map((l) => <a href={l.href} class:list={{ active: isActive(l.href) }}>{l.label}</a>)}
 	</nav>
+ <div class="preferences">
+ <label class="language-picker">
+  <span>{site.language}</span>
+  <select id="language-select" aria-label={site.language}>
+   {languageLinks.map((link) => <option value={link.href} data-lang={link.lang} lang={link.lang} selected={link.lang === lang}>{languageNames[link.lang]}</option>)}
+  </select>
+ </label>
  <label class="theme-picker">
   <span>{themes.label}</span>
   <select id="theme-select" aria-label={themes.label}>
@@ -33,9 +40,23 @@ const isActive = (href: string) =>
    <option value="night">{themes.night}</option>
   </select>
  </label>
+ </div>
 </header>
 
 <script>
+ document.querySelectorAll<HTMLAnchorElement>('a[data-language]').forEach((link) => {
+  link.addEventListener('click', () => {
+   try { localStorage.setItem('blog-language', link.dataset.language || 'zh'); } catch {}
+  });
+ });
+
+ const languageSelect = document.querySelector<HTMLSelectElement>('#language-select');
+ languageSelect?.addEventListener('change', () => {
+  const option = languageSelect.selectedOptions[0];
+  try { localStorage.setItem('blog-language', option.dataset.lang || 'zh'); } catch {}
+  location.assign(option.value);
+ });
+
  const select = document.querySelector<HTMLSelectElement>('#theme-select');
  const themes = ['paper', 'mist', 'forest', 'rose', 'night'];
  if (select) {
@@ -54,16 +75,17 @@ const isActive = (href: string) =>
 </script>
 
 <style>
- .theme-picker { display: flex; align-items: center; gap: .4rem; color: var(--muted); font-size: .8rem; }
+ .theme-picker, .language-picker { display: flex; align-items: center; gap: .4rem; color: var(--muted); font-size: .8rem; }
  select { max-width: 10rem; border: 1px solid var(--line); border-radius: 6px; padding: .35rem .45rem; background: var(--code-bg); color: var(--ink); font: inherit; cursor: pointer; }
  select:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
- @media (max-width: 600px) { .site-header { flex-wrap: wrap; } .theme-picker { flex-basis: 100%; } }
+ @media (max-width: 600px) { .site-header { flex-wrap: wrap; } .theme-picker, .language-picker { flex-basis: 100%; } }
 
 	.site-header {
 		max-width: var(--width);
 		margin: 0 auto;
 		padding: 1.75rem 1.25rem 1.25rem;
 		display: flex;
+  flex-wrap: wrap;
 		align-items: baseline;
 		justify-content: space-between;
 		gap: 1rem;
@@ -74,12 +96,14 @@ const isActive = (href: string) =>
 		font-size: 1.25rem;
 		font-weight: 700;
 		letter-spacing: 0.04em;
+  overflow-wrap: anywhere;
 		color: var(--ink);
 		text-decoration: none;
 	}
 	nav {
 		display: flex;
-		gap: 1.25rem;
+		gap: 1rem;
+  flex-wrap: wrap;
 	}
 	nav a {
 		color: var(--muted);

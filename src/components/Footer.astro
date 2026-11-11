@@ -1,12 +1,17 @@
 ---
 import { AUTHOR, GITHUB_URL } from '../consts';
-import { withBase } from '../lib/site';
+import { localePath } from '../lib/site';
+import { siteUI, type Language } from '../lib/languages';
+interface Props { lang?: Language; }
+const { lang = 'zh' } = Astro.props;
+const ui = siteUI[lang];
+const author = AUTHOR === '你的名字' ? ui.author : AUTHOR;
 ---
 
 <footer class="site-footer">
-	<span>© {new Date().getFullYear()} {AUTHOR}</span>
+	<span>© {new Date().getFullYear()} {author}</span>
 	<span>
-		<a href={withBase('rss.xml')}>RSS</a> · <a href={GITHUB_URL} rel="noopener">GitHub</a>
+		<a href={localePath(lang, 'rss.xml')}>{ui.rss}</a> · <a href={GITHUB_URL} rel="noopener">GitHub</a>
 	</span>
 </footer>
 
