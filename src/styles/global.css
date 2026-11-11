@@ -128,16 +128,12 @@ img {
 }
 
 /* Shiki 高亮跟随所选配色。 */
-.astro-code,
-.astro-code span {
-	color: var(--shiki-light);
-}
 .astro-code {
 	background-color: var(--code-bg) !important;
 }
 :root[data-theme='night'] .astro-code,
 :root[data-theme='night'] .astro-code span {
- color: var(--shiki-dark);
+ color: var(--shiki-dark) !important;
 }
 
 .section-title {
