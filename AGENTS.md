@@ -32,3 +32,5 @@ Repository: https://github.com/standby2025/pasges. Publish using a unique `v*` t
 ## Global localization (mandatory)
 
 Localization is site-wide, not article-only. Follow the global rules in `docs/ARTICLE_IMPORT_RULES.md`: localized home/archive/about/navigation/footer/dates/theme controls/metadata/RSS, current-language navigation, context-preserving language switching and Arabic RTL. Global pages use locale prefixes (Chinese stays at root); articles retain language suffixes. UI dictionaries are in `src/lib/languages.ts`; use shared `SitePage.astro`, Header, Footer and `localePath()` instead of creating article-specific localization.
+
+The site brand is **AI才是电脑**, defined by `SITE_TITLE` in `src/consts.ts`. Keep this exact brand name across all languages; localize surrounding UI, not the brand.
