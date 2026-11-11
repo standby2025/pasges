@@ -17,7 +17,7 @@ for (const lang of languages) {
     if (!html.includes(`href="${base}${prefix}${path}"`)) errors.push(`${file}: missing current-language navigation ${path}`);
    }
    if (!html.includes(`href="${base}${prefix}/rss.xml"`)) errors.push(`${file}: missing localized RSS`);
-   if (!html.includes('id="language-select"')) errors.push(`${file}: missing global language switcher`);
+   if (!html.includes('id="language-picker"')) errors.push(`${file}: missing global language switcher`);
    const alternates = [...html.matchAll(/<link\b[^>]*hreflang="(zh|en|fr|es|ru|ar)"[^>]*>/g)];
    if (new Set(alternates.map((m) => m[1])).size !== 6) errors.push(`${file}: missing global hreflang`);
    const postList = html.match(/<ul\b[^>]*class="post-list[^"]*"[^>]*>([\s\S]*?)<\/ul>/)?.[1] || '';
