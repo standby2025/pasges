@@ -1,6 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { articleUI, languageNames, localeNames } from '../lib/languages';
+import { articleUI, localeNames } from '../lib/languages';
 import { withBase } from '../lib/site';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
@@ -37,11 +37,6 @@ const direction = lang === 'ar' ? 'rtl' : 'ltr';
 						{tags.map((t) => <span class="tag">{t}</span>)}
 					</div>
 				</header>
-    {translations.length > 1 && <nav class="language-switch" aria-label={ui.languages}>
-     {translations.sort((a, b) => ['zh', 'en', 'fr', 'es', 'ru', 'ar'].indexOf(a.data.lang) - ['zh', 'en', 'fr', 'es', 'ru', 'ar'].indexOf(b.data.lang)).map((post) => (
-      <a href={withBase(`/blog/${post.id}/`)} lang={post.data.lang} hreflang={post.data.lang} data-language={post.data.lang} aria-current={post.data.lang === lang ? 'page' : undefined}>{languageNames[post.data.lang]}</a>
-     ))}
-    </nav>}
     {translationStatus === 'machine' && <p class="translation-note">{ui.machine}</p>}
 				<div class="prose" lang={lang} dir={direction}><slot /></div>
 			</article>
@@ -51,8 +46,6 @@ const direction = lang === 'ar' ? 'rtl' : 'ltr';
 </html>
 
 <style>
- .language-switch { display: flex; flex-wrap: wrap; gap: .4rem .9rem; padding-block: .8rem; margin-bottom: 1rem; border-block: 1px solid var(--line); font-size: .9rem; }
- .language-switch a[aria-current='page'] { color: var(--ink); font-weight: 700; text-decoration: none; }
  .translation-note { color: var(--muted); background: var(--code-bg); padding: .75rem 1rem; border-radius: 6px; font-size: .85rem; }
 
 	.post-head {

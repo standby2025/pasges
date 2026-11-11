@@ -44,12 +44,6 @@ const isActive = (href: string) =>
 </header>
 
 <script>
- document.querySelectorAll<HTMLAnchorElement>('a[data-language]').forEach((link) => {
-  link.addEventListener('click', () => {
-   try { localStorage.setItem('blog-language', link.dataset.language || 'zh'); } catch {}
-  });
- });
-
  const languageSelect = document.querySelector<HTMLSelectElement>('#language-select');
  languageSelect?.addEventListener('change', () => {
   const option = languageSelect.selectedOptions[0];
