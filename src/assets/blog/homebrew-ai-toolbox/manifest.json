@@ -30,12 +30,6 @@
     "prompt": "水平条形图，过去 30 天安装次数：Codex 351138、uv 206718、Ollama 62453、Claude Code 58378、OpenCode 45393、llama.cpp 35373。Ollama 只含命令行版，App 版另有 8975 次。数据截至 2026-11-09，只统计开启分析的用户。 重建 prompt：制作独立原生 SVG 信息图，不含 HTML、脚本或远程依赖。白色背景，深蓝正文 #203047，蓝色图形 #275fa4，紫色区分项目 tap，灰色区分未收录。宽 1000 像素，高度随内容调整；标签清晰换行，不裁切；阿拉伯文使用从右向左文字排版。文字语言为 中文。"
   },
   {
-    "file": "06-screenshot-placeholders.zh.svg",
-    "lang": "zh",
-    "figure": 6,
-    "prompt": "三张虚线边框占位卡片，分别标明 Homebrew.app 主界面、升级列表和对应命令提示截图待补。明确标为占位示意，不模仿或伪造真实界面。原稿版本 0.6.0，要求 macOS 26 及以上。 重建 prompt：制作独立原生 SVG 信息图，不含 HTML、脚本或远程依赖。白色背景，深蓝正文 #203047，蓝色图形 #275fa4，紫色区分项目 tap，灰色区分未收录。宽 1000 像素，高度随内容调整；标签清晰换行，不裁切；阿拉伯文使用从右向左文字排版。文字语言为 中文。"
-  },
-  {
     "file": "07-gui-selection.zh.svg",
     "lang": "zh",
     "figure": 7,
@@ -70,12 +64,6 @@
     "lang": "en",
     "figure": 5,
     "prompt": "Horizontal bar chart, number of installs in the past 30 days: Codex 351138, uv 206718, Ollama 62453, Claude Code 58378, OpenCode 45393, llama.cpp 35373. Ollama only contains the command line version, and App version also has 8975 times. The data ends at 2026-11-09. Only users who enable analysis are counted. Rebuild prompt: Produce a standalone native SVG infographic without HTML, scripts or remote dependencies. White background, dark blue text #203047, blue graphics #275fa4, purple distinction item tap, gray distinction not included. Width 1000 pixels, the height adjusts according to the content; labels are clearly wrapped and not cropped; Arabic text is typed from right to left. The text language is English."
-  },
-  {
-    "file": "06-screenshot-placeholders.en.svg",
-    "lang": "en",
-    "figure": 6,
-    "prompt": "Three dotted border placeholder cards, respectively indicating the Homebrew.app main interface, upgrade list and corresponding command prompt screenshots to be added. It is clearly marked as a placeholder and does not imitate or fake the real interface. Manuscript version 0.6.0, requires macOS 26 and above. Rebuild prompt: Produce a standalone native SVG infographic without HTML, scripts or remote dependencies. White background, dark blue text #203047, blue graphics #275fa4, purple distinction item tap, gray distinction not included. Width 1000 pixels, the height adjusts according to the content; labels are clearly wrapped and not cropped; Arabic text is typeset from right to left. The text language is English."
   },
   {
     "file": "07-gui-selection.en.svg",
@@ -114,12 +102,6 @@
     "prompt": "Graphique à barres horizontales, nombre d'installations au cours des derniers jours 30 : Codex 351138, uv 206718, Ollama 62453, Claude Code 58378, OpenCode 45393, llama.cpp 35373. Ollama contient uniquement la version en ligne de commande et la version App contient également des heures 8975. Les données se terminent à 2026-11-09. Seuls les utilisateurs qui activent l'analyse sont comptés. Reconstruisez prompt : produisez une infographie SVG native autonome sans HTML, scripts ou dépendances distantes. Fond blanc, texte bleu foncé #203047, graphiques bleus #275fa4, article de distinction violet tap, distinction grise non incluse. Largeur 1000 pixels, la hauteur s'ajuste en fonction du contenu ; les étiquettes sont clairement emballées et non tronquées ; Le texte arabe est tapé de droite à gauche. La langue du texte est français."
   },
   {
-    "file": "06-screenshot-placeholders.fr.svg",
-    "lang": "fr",
-    "figure": 6,
-    "prompt": "Trois cartes réservées à bordure en pointillés, indiquant respectivement l'interface principale de Homebrew.app, la liste de mise à niveau et les captures d'écran d'invite de commande correspondantes à ajouter. Il est clairement marqué comme un espace réservé et n’imite ni ne simule la véritable interface. La version manuscrite 0.6.0 nécessite macOS 26 et versions ultérieures. Reconstruisez prompt : produisez une infographie SVG native autonome sans HTML, scripts ou dépendances distantes. Fond blanc, texte bleu foncé #203047, graphiques bleus #275fa4, article de distinction violet tap, distinction grise non incluse. Largeur 1000 pixels, la hauteur s'ajuste en fonction du contenu ; les étiquettes sont clairement emballées et non tronquées ; Le texte arabe est composé de droite à gauche. La langue du texte est français."
-  },
-  {
     "file": "07-gui-selection.fr.svg",
     "lang": "fr",
     "figure": 7,
@@ -154,12 +136,6 @@
     "lang": "es",
     "figure": 5,
     "prompt": "Gráfico de barras horizontales, número de instalaciones en los últimos días 30: Codex 351138, uv 206718, Ollama 62453, Claude Code 58378, OpenCode 45393, llama.cpp 35373. Ollama solo contiene la versión de línea de comando, y la versión App también contiene tiempos 8975. Los datos terminan en 2026-11-09. Sólo se cuentan los usuarios que habilitan el análisis. Reconstruir prompt: produzca una infografía nativa independiente de SVG sin HTML, scripts ni dependencias remotas. Fondo blanco, texto azul oscuro #203047, gráficos azules #275fa4, elemento de distinción violeta tap, distinción gris no incluida. Ancho 1000 píxeles, la altura se ajusta según el contenido; las etiquetas están claramente envueltas y no recortadas; El texto árabe se escribe de derecha a izquierda. El idioma del texto es español."
-  },
-  {
-    "file": "06-screenshot-placeholders.es.svg",
-    "lang": "es",
-    "figure": 6,
-    "prompt": "Tres tarjetas de marcador de posición con borde de puntos, que indican respectivamente la interfaz principal Homebrew.app, la lista de actualizaciones y las capturas de pantalla del símbolo del sistema correspondientes que se agregarán. Está claramente marcado como marcador de posición y no imita ni falsifica la interfaz real. La versión manuscrita 0.6.0, requiere macOS 26 y superior. Reconstruir prompt: produzca una infografía nativa independiente de SVG sin HTML, scripts ni dependencias remotas. Fondo blanco, texto azul oscuro #203047, gráficos azules #275fa4, elemento de distinción violeta tap, distinción gris no incluida. Ancho 1000 píxeles, la altura se ajusta según el contenido; las etiquetas están claramente envueltas y no recortadas; El texto árabe está escrito de derecha a izquierda. El idioma del texto es español."
   },
   {
     "file": "07-gui-selection.es.svg",
@@ -198,12 +174,6 @@
     "prompt": "Горизонтальная диаграмма, количество установок за последние 30 дни: Codex 351138, uv 206718, Ollama 62453, Claude Code 58378, OpenCode 45393, llama.cpp 35373. Ollama содержит только версию командной строки, а версия App также имеет время 8975. Данные заканчиваются на 2026-11-09. Учитываются только пользователи, включившие анализ. Перестроить prompt: создать автономную собственную инфографику SVG без HTML, сценариев или удаленных зависимостей. Белый фон, темно-синий текст #203047, синяя графика #275fa4, фиолетовый знак отличия tap, серый знак отличия не включен. Ширина 1000 пикселей, высота регулируется в зависимости от содержимого; этикетки четко завернуты и не обрезаны; Арабский текст набирается справа налево. Язык текста – русский."
   },
   {
-    "file": "06-screenshot-placeholders.ru.svg",
-    "lang": "ru",
-    "figure": 6,
-    "prompt": "Три карточки-заполнителя с пунктирной границей, обозначающие соответственно основной интерфейс Homebrew.app, список обновлений и соответствующие снимки экрана командной строки, которые необходимо добавить. Он четко обозначен как заполнитель и не имитирует и не подделывает реальный интерфейс. Рукописная версия 0.6.0 требует macOS 26 и выше. Перестроить prompt: создать автономную собственную инфографику SVG без HTML, сценариев или удаленных зависимостей. Белый фон, темно-синий текст #203047, синяя графика #275fa4, фиолетовый знак отличия tap, серый знак отличия не включен. Ширина 1000 пикселей, высота регулируется в зависимости от содержимого; этикетки четко завернуты и не обрезаны; Арабский текст набирается справа налево. Язык текста – русский."
-  },
-  {
     "file": "07-gui-selection.ru.svg",
     "lang": "ru",
     "figure": 7,
@@ -240,15 +210,17 @@
     "prompt": "مخطط أشرطة أفقي لعمليات التثبيت خلال آخر 30 يوماً: Codex 351138، uv 206718، Ollama 62453، Claude Code 58378، OpenCode 45393، llama.cpp 35373. تشمل قيمة Ollama أداة سطر الأوامر فقط، مع 8975 عملية إضافية للتطبيق. البيانات حتى 2026-11-09، وتشمل المستخدمين الذين فعّلوا التحليلات فقط. تعليمات إعادة الإنشاء: أنشئ رسماً معلوماتياً مستقلاً بصيغة SVG أصلية، دون HTML أو نصوص برمجية أو اعتماد على موارد خارجية. خلفية بيضاء، ونص أزرق داكن #203047، وأشكال زرقاء #275fa4، وبنفسجي لمستودعات tap الخاصة بالمشاريع، ورمادي للمشاريع غير المدرجة. العرض 1000 بكسل، والارتفاع حسب المحتوى. لفّ التسميات بوضوح دون قصها، واستخدم اتجاه الكتابة من اليمين إلى اليسار. لغة النص: العربية."
   },
   {
-    "file": "06-screenshot-placeholders.ar.svg",
-    "lang": "ar",
-    "figure": 6,
-    "prompt": "ثلاث بطاقات بديلة بحدود متقطعة، تشير إلى أن لقطات الشاشة الرئيسية لـ Homebrew.app وقائمة الترقيات وتلميحات الأوامر المقابلة لم تُضف بعد. وضّح أنها عناصر نائبة وليست صوراً حقيقية للمنتج، ولا تقلّد واجهته. يذكر النص الأصلي الإصدار 0.6.0 والحاجة إلى macOS 26 أو أحدث. تعليمات إعادة الإنشاء: أنشئ رسماً معلوماتياً مستقلاً بصيغة SVG أصلية، دون HTML أو نصوص برمجية أو اعتماد على موارد خارجية. خلفية بيضاء، ونص أزرق داكن #203047، وأشكال زرقاء #275fa4، وبنفسجي لمستودعات tap الخاصة بالمشاريع، ورمادي للمشاريع غير المدرجة. العرض 1000 بكسل، والارتفاع حسب المحتوى. لفّ التسميات بوضوح دون قصها، واستخدم اتجاه الكتابة من اليمين إلى اليسار. لغة النص: العربية."
-  },
-  {
     "file": "07-gui-selection.ar.svg",
     "lang": "ar",
     "figure": 7,
     "prompt": "دليل اختيار من أربعة أسطر: على macOS 26 أو أحدث اختر Homebrew.app الرسمي؛ على نظام أقدم مع إدارة التطبيقات الرسومية فقط اختر Applite؛ للإدارة التفصيلية اختر Cork؛ لمحبي الطرفية اختر Bold Brew. حافظ على توصيات الأصل وأشر إلى الرجوع إلى معلومات التوافق الرسمية. تعليمات إعادة الإنشاء: أنشئ رسماً معلوماتياً مستقلاً بصيغة SVG أصلية، دون HTML أو نصوص برمجية أو اعتماد على موارد خارجية. خلفية بيضاء، ونص أزرق داكن #203047، وأشكال زرقاء #275fa4، وبنفسجي لمستودعات tap الخاصة بالمشاريع، ورمادي للمشاريع غير المدرجة. العرض 1000 بكسل، والارتفاع حسب المحتوى. لفّ التسميات بوضوح دون قصها، واستخدم اتجاه الكتابة من اليمين إلى اليسار. لغة النص: العربية."
+  },
+  {
+    "file": "06-homebrew-app-main.webp",
+    "languageNeutral": true,
+    "figure": "6a",
+    "prompt": "官方 Homebrew.app（BrewUI）主窗口截图：左侧栏依次是 Installed、Upgrades、Discover、Services、Doctor、Configuration；中间是已安装软件列表，右侧是 abseil 的详情、依赖和卸载命令。来自 Homebrew/BrewUI 官方仓库（github.com/Homebrew/BrewUI），界面保持英文原貌。 重建 prompt：在 macOS 26 上用 Homebrew.app 重新截取主窗口，保留系统窗口阴影，宽约 1500 像素，界面语言保持英文，保存为 WebP。",
+    "source": "https://github.com/Homebrew/BrewUI (docs/images/brewui.png, converted to WebP at 2000px wide)",
+    "note": "Real product screenshot with English UI; shared by all six languages because its text cannot be localized."
   }
 ]

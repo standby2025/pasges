@@ -190,7 +190,8 @@ brew install --cask homebrew-app
 
 装好后会得到一个叫 Homebrew.app 的应用。它的源码仓库叫 Homebrew/BrewUI，所以网上也有人叫它 BrewUI。
 
-![三张虚线边框占位卡片，分别标明 Homebrew.app 主界面、升级列表和对应命令提示截图待补。明确标为占位示意，不模仿或伪造真实界面。原稿版本 0.6.0，要求 macOS 26 及以上。 重建 prompt：制作独立原生 SVG 信息图，不含 HTML、脚本或远程依赖。白色背景，深蓝正文 #203047，蓝色图形 #275fa4，紫色区分项目 tap，灰色区分未收录。宽 1000 像素，高度随内容调整；标签清晰换行，不裁切；阿拉伯文使用从右向左文字排版。文字语言为 中文。](../../assets/blog/homebrew-ai-toolbox/06-screenshot-placeholders.zh.svg)
+![官方 Homebrew.app（BrewUI）主窗口截图：左侧栏依次是 Installed、Upgrades、Discover、Services、Doctor、Configuration；中间是已安装软件列表，右侧是 abseil 的详情、依赖和卸载命令。来自 Homebrew/BrewUI 官方仓库（github.com/Homebrew/BrewUI），界面保持英文原貌。 重建 prompt：在 macOS 26 上用 Homebrew.app 重新截取主窗口，保留系统窗口阴影，宽约 1500 像素，界面语言保持英文，保存为 WebP。](../../assets/blog/homebrew-ai-toolbox/06-homebrew-app-main.webp)
+
 
 用之前有三点心里要有数：当前版本是 0.6.0，还没到 1.0；需要 macOS 26 及以上；过去 30 天安装了 5,251 次。
 

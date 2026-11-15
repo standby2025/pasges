@@ -115,9 +115,11 @@ chart_specs=[
  ('03-tool-coverage','coverage','项目覆盖矩阵。Agent 8/8：OpenClaw、DeepSeek Harness、Hermes Agent、OpenCode、Claude Code、Codex、Gemini CLI、Pi，均为官方仓库。本地模型 3/3：Ollama、llama.cpp、Whisper，均为官方仓库。其他工具 6/12：cc-switch、spec-kit、ComfyUI 桌面版、Open Design 为官方仓库；Orca、VoiceStudio 为项目 tap；claw-code、Stable Diffusion WebUI、Graphify、MoneyPrinterTurbo、Paperclip、RuView 未收录。总计 17/23，其中官方 15、tap 2。'),
  ('04-star-distribution','stars','水平条形图，297 个 AI 相关包按 GitHub 星数分组：少于 1000 星 88 个，1000 至 1 万星 126 个，1 万至 10 万星 72 个，10 万星以上 11 个。按关键词粗略筛选，可能存在误判。'),
  ('05-install-counts','installs','水平条形图，过去 30 天安装次数：Codex 351138、uv 206718、Ollama 62453、Claude Code 58378、OpenCode 45393、llama.cpp 35373。Ollama 只含命令行版，App 版另有 8975 次。数据截至 2026-11-09，只统计开启分析的用户。'),
- ('06-screenshot-placeholders','screens','三张虚线边框占位卡片，分别标明 Homebrew.app 主界面、升级列表和对应命令提示截图待补。明确标为占位示意，不模仿或伪造真实界面。原稿版本 0.6.0，要求 macOS 26 及以上。'),
+ ('06-screenshot-placeholders','screens','虚线边框占位卡片，标明 Homebrew.app 升级列表截图待补。明确标为占位示意，不模仿或伪造真实界面。原稿版本 0.6.0，要求 macOS 26 及以上。'),
  ('07-gui-selection','choice','选择指南，四行建议：macOS 26 或更新选择官方 Homebrew.app；较旧系统且只管理图形 App 选择 Applite；需要更细管理选择 Cork；喜欢终端选择 Bold Brew。保留原稿建议并注明以官方兼容性说明为准。'),
 ]
+REAL_SHOT='06-homebrew-app-main.webp'
+REAL_PROMPT='官方 Homebrew.app（BrewUI）主窗口截图：左侧栏依次是 Installed、Upgrades、Discover、Services、Doctor、Configuration；中间是已安装软件列表，右侧是 abseil 的详情、依赖和卸载命令。来自 Homebrew/BrewUI 官方仓库（github.com/Homebrew/BrewUI），界面保持英文原貌。 重建 prompt：在 macOS 26 上用 Homebrew.app 重新截取主窗口，保留系统窗口阴影，宽约 1500 像素，界面语言保持英文，保存为 WebP。'
 base_prompt='重建 prompt：制作独立原生 SVG 信息图，不含 HTML、脚本或远程依赖。白色背景，深蓝正文 #203047，蓝色图形 #275fa4，紫色区分项目 tap，灰色区分未收录。宽 1000 像素，高度随内容调整；标签清晰换行，不裁切；阿拉伯文使用从右向左文字排版。文字语言为 LANG。'
 lang_names={'zh':'中文','en':'English','fr':'français','es':'español','ru':'русский','ar':'العربية'}
 texts=[TITLE,DESCRIPTION,'AI 工具','文中数据截至 2026 年 11 月 9 日']
@@ -242,20 +244,43 @@ def make_svg(lang,index):
         items.append(f'<text x="778" y="{y+8}" font-size="22" fill="#203047" direction="ltr">{escape(display)}</text>')
         y+=45
     if index==0:
-        start=y
+        ink,accent,line,panel,edge='#203047','#275fa4','#7d8fa6','#f4f7fb','#d9e2ee'
+        def mx(x,w=0): return 1000-x-w if rtl else x
+        def label(lines,cx,cy,size,color,bold=False):
+            top=cy-(len(lines)-1)*size*0.6+size*0.35
+            for n,l in enumerate(lines):
+                items.append(f'<text x="{cx}" y="{round(top+n*size*1.2,1)}" font-size="{size}" fill="{color}" text-anchor="middle" direction="{"rtl" if rtl else "ltr"}" unicode-bidi="embed"'+(' font-weight="600"' if bold else '')+'>'+escape(l)+'</text>')
+        def box(x,yy,w,h,lines,fill='#ffffff',stroke=line,color=ink,bold=False,size=20):
+            items.append(f'<rect x="{mx(x,w)}" y="{yy}" width="{w}" height="{h}" rx="10" fill="{fill}" stroke="{stroke}"/>')
+            label(lines,mx(x,w)+w/2,yy+h/2,size,color,bold)
+        def arrow(x1,x2,yy,color):
+            a1,a2=mx(x1),mx(x2)
+            d=-1 if a2<a1 else 1
+            items.append(f'<path d="M{a1} {yy} L{a2-d*2} {yy}" stroke="{color}" stroke-width="2" fill="none"/><path d="M{a2} {yy} l{-d*10} -6 l0 12 z" fill="{color}"/>')
+        top=y+6; ph=350
         for x in [28,516]:
-            items.append(f'<rect x="{x}" y="{start-18}" width="456" height="390" rx="12" fill="#f4f7fb" stroke="#d9e2ee"/>')
-        text(L('before'),x=48,size=23,max_units=29,bold=True)
-        for k,tool in [('curl','Claude Code'),('dmg','Ollama'),('npm','Gemini CLI')]:
-            text(L(k),x=48,size=21,max_units=29);text('→ '+tool,x=48,size=22,max_units=29,bold=True);y+=10
-        left_end=y
-        y=start
-        text(L('after'),x=536,size=23,max_units=29,bold=True)
-        text('Homebrew',x=536,size=26,max_units=29,bold=True)
-        text('brew upgrade',x=536,size=22,max_units=29,bold=True)
-        text('↓',x=536,size=26)
-        for tool in ['Claude Code','Ollama','Gemini CLI']:text(tool,x=536,size=22,max_units=29)
-        y=max(left_end,y,start+390)+28
+            items.append(f'<rect x="{mx(x,456)}" y="{top}" width="456" height="{ph}" rx="12" fill="{panel}" stroke="{edge}"/>')
+        for x,key in [(48,'before'),(536,'after')]:
+            label(wrap(L(key),30),mx(x,416)+208,top+36,23,ink,True)
+        rows=[top+95+i*70 for i in range(3)]
+        tools=['Claude Code','Ollama','Gemini CLI']
+        for ry,k,tool in zip(rows,['curl','dmg','npm'],tools):
+            box(48,ry,150,56,wrap(L(k),13),fill='#eef2f8',stroke=edge,size=19)
+            arrow(198,246,ry+28,line)
+            box(250,ry,214,56,[tool],bold=True,size=21)
+        hub_y=rows[1]-4
+        box(536,hub_y,150,64,['Homebrew','brew upgrade'],fill=accent,stroke=accent,color='#ffffff',bold=True,size=19)
+        for ry in rows:
+            a1,a2=mx(686),mx(738)
+            ym=hub_y+32
+            items.append(f'<path d="M{a1} {ym} C{(a1+a2)/2} {ym} {(a1+a2)/2} {ry+28} {a2-(8 if a2>a1 else -8)} {ry+28}" stroke="{accent}" stroke-width="2.4" fill="none"/>')
+            d=1 if a2>a1 else -1
+            items.append(f'<path d="M{a2} {ry+28} l{-d*10} -6 l0 12 z" fill="{accent}"/>')
+            box(742,ry,222,56,[tools[rows.index(ry)]],bold=True,size=21)
+        y=top+ph+34
+        for x,key in [(48,'methods'),(536,'unified')]:
+            label(wrap(L(key),32),mx(x,416)+208,top+ph-20,17,'#5a6b80')
+        y=top+ph+30
     elif index==1:
         for label,value in [('OpenCode',.5),('uv',1.6),('llama.cpp',1.6),('Codex',1.8),('Claude Code',3.5),('Hermes Agent',6.7),('OpenClaw',8),('Ollama',25),('Gemini CLI',26.8)]:
             bar(label,value,30,f'{value:.1f} '+L('hours'))
@@ -275,7 +300,7 @@ def make_svg(lang,index):
         for label,v in [('Codex',351138),('uv',206718),('Ollama',62453),('Claude Code',58378),('OpenCode',45393),('llama.cpp',35373)]:bar(label,v,360000,f'{v:,}')
         text(L('installs-note'),size=18,max_units=90)
     elif index==5:
-        for k in ['main','updates','command']:
+        for k in ['updates']:
             chunks=wrap(L(k),65);height=max(100,len(chunks)*34+32)
             items.append(f'<rect x="28" y="{y-20}" width="944" height="{height}" rx="12" fill="#f4f7fb" stroke="#91a3ba" stroke-dasharray="8 5"/>')
             y+=15;text(L(k),x=48,size=24,max_units=65);y+=height-(len(chunks)*36+15)+18
@@ -299,7 +324,13 @@ for lang in LANGS:
         if in_code:
             output.append(line.replace('名字','NAME') if lang!='zh' else line);continue
         if line.startswith('FIGURETOKEN'):
-            index=int(line[-2:])-1;filename,prompt=make_svg(lang,index)
+            index=int(line[-2:])-1
+            if index==5:
+                real_prompt=REAL_PROMPT  # 外部原图，不翻译
+                real=real_prompt.replace('\\','\\\\').replace('[','\\[').replace(']','\\]').replace('\n',' ')
+                output.append(f'![{real}](../../assets/blog/{SLUG}/{REAL_SHOT})\n')
+                continue  # 升级列表截图占位已按要求移除
+            filename,prompt=make_svg(lang,index)
             alt=prompt.replace('\\','\\\\').replace('[','\\[').replace(']','\\]').replace('\n',' ')
             output.append(f'![{alt}](../../assets/blog/{SLUG}/{filename})')
             assets.append({'file':filename,'lang':lang,'figure':index+1,'prompt':prompt})
@@ -318,6 +349,7 @@ for lang in LANGS:
     (CONTENT/(SLUG+'.'+lang+'.md')).write_text(metadata+'\n'.join(output).strip()+'\n')
 old=CONTENT/(SLUG+'.md')
 if old.exists():old.unlink()
+assets.append({'file':REAL_SHOT,'languageNeutral':True,'figure':'6a','prompt':REAL_PROMPT,'source':'https://github.com/Homebrew/BrewUI (docs/images/brewui.png, converted to WebP at 2000px wide)','note':'Real product screenshot with English UI; shared by all six languages because its text cannot be localized.'})
 (ASSETS/'manifest.json').write_text(json.dumps(assets,ensure_ascii=False,indent=2)+'\n')
 manifest={
  'slug':SLUG,'importedAt':'2026-11-11','sourceLanguage':'zh','languages':LANGS,
@@ -325,8 +357,8 @@ manifest={
  'sourcePaths':['../a1/Homebrew-AI工具箱-成品.html','../a1/Homebrew-AI工具箱-成品-haiku.md'],
  'displaySource':'src/content/blog/homebrew-ai-toolbox.<lang>.md',
  'translation':{'method':'Google Translate via public translation endpoint, cached; agent corrections to metadata, chart labels and table structure; not human reviewed','cache':'translations.json','preservation':'Every source paragraph, list, table, link and code block retained; code/URLs protected during translation.'},
- 'figures':{'countPerLanguage':7,'format':'native SVG','localizedAssets':42,'method':'Redrawn from archived chart data. No HTML foreignObject or screenshots fabricated. Screenshot placeholders remain visibly labeled.','prompts':'src/assets/blog/homebrew-ai-toolbox/manifest.json'},
- 'editorialPending':['Original fact-check markers retained and translated.','Original three missing product screenshots retained as one localized placeholder figure.'],
+ 'figures':{'countPerLanguage':6,'format':'native SVG','localizedAssets':36,'method':'Redrawn from archived chart data. No HTML foreignObject or screenshots fabricated. One real official Homebrew.app screenshot is shared by all languages; the missing-screenshot placeholder figure was removed at the author request.','prompts':'src/assets/blog/homebrew-ai-toolbox/manifest.json'},
+ 'editorialPending':['Original fact-check markers retained and translated.','Original three missing product screenshots: main window now uses the official Homebrew/BrewUI screenshot; the remaining placeholder was removed at the author request.'],
  'rebuild':'python3 scripts/import_homebrew.py (offline); --translate explicitly enables missing network translations'
 }
 (ARCHIVE/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
