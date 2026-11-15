@@ -26,6 +26,7 @@ const direction = lang === 'ar' ? 'rtl' : 'ltr';
   {translationKey && <link rel="alternate" hreflang="x-default" href={new URL(withBase(`/blog/${translationKey}.zh/`), Astro.site)} />}
 	</head>
 	<body>
+		<div class="progress" aria-hidden="true"></div>
 		<Header lang={lang} languageLinks={translations.map((post) => ({ lang: post.data.lang, href: withBase(`/blog/${post.id}/`) }))} />
 		<main>
 			<article>
@@ -42,30 +43,39 @@ const direction = lang === 'ar' ? 'rtl' : 'ltr';
 			</article>
 		</main>
 		<Footer lang={lang} />
+		<script>
+			const bar = document.querySelector<HTMLElement>('.progress');
+			const update = () => {
+				const max = document.documentElement.scrollHeight - innerHeight;
+				bar?.style.setProperty('--p', String(max > 0 ? Math.min(1, scrollY / max) : 0));
+			};
+			addEventListener('scroll', update, { passive: true });
+			addEventListener('resize', update);
+			update();
+		</script>
 	</body>
 </html>
 
 <style>
- .translation-note { color: var(--muted); background: var(--code-bg); padding: .75rem 1rem; border-radius: 6px; font-size: .85rem; }
-
+ .translation-note { margin: 0 0 2rem; padding: .75rem 1rem; border: 1px solid var(--line); border-radius: 10px; background: var(--code-bg); color: var(--muted); font-size: .85rem; }
+	.progress { position: fixed; inset: 0 0 auto 0; z-index: 40; height: 3px; background: var(--accent); transform: scaleX(var(--p, 0)); transform-origin: left; pointer-events: none; }
+	:global([dir='rtl']) .progress { transform-origin: right; }
 	.post-head {
-		margin-bottom: 2rem;
+		margin-bottom: 2.5rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid var(--line);
 	}
 	h1 {
-		margin: 0 0 0.75rem;
-		font-size: 2rem;
+		margin: 0 0 1rem;
+		font-size: clamp(1.9rem, 5vw, 2.6rem);
+		line-height: 1.3;
 	}
 	.meta {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.75rem;
+		align-items: center;
+		gap: 0.5rem 0.9rem;
 		color: var(--muted);
 		font-size: 0.9rem;
-	}
-	.tag {
-		padding: 0 0.5rem;
-		border: 1px solid var(--line);
-		border-radius: 3px;
-		font-size: 0.8rem;
 	}
 </style>

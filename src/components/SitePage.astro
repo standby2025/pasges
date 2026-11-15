@@ -31,13 +31,19 @@ const homeTargets = Object.fromEntries(languages.map((language) => [language, lo
  </head>
  <body>
   <Header lang={lang} languageLinks={languageLinks} />
-  <main>
+  <main class:list={{ wide: kind !== 'about' }}>
    {kind === 'home' ? <>
-    <section class="intro"><h1>{ui.title}</h1><p>{ui.description}</p></section>
+    <section class="hero">
+     <h1>{ui.title}</h1>
+     <p class="lede">{ui.description}</p>
+     <div class="actions">
+      <a class="btn primary" href={localePath(lang, '/blog/')}>{ui.all} <span aria-hidden="true">{lang === 'ar' ? '←' : '→'}</span></a>
+      <a class="btn" href={localePath(lang, '/about/')}>{articleUI[lang].about}</a>
+     </div>
+    </section>
     <h2 class="section-title">{ui.recent}</h2>
-    <PostList posts={posts.slice(0, 8)} lang={lang} />
+    <PostList posts={posts.slice(0, 7)} lang={lang} featured />
     {posts.length === 0 && <p>{ui.empty}</p>}
-    <p><a href={localePath(lang, '/blog/')}>{ui.all} <span aria-hidden="true">{lang === 'ar' ? '←' : '→'}</span></a></p>
    </> : kind === 'blog' ? <>
     <h1>{title}</h1>
     {years.map((year) => <section class="year-group">
@@ -51,9 +57,16 @@ const homeTargets = Object.fromEntries(languages.map((language) => [language, lo
  </body>
 </html>
 <style>
+ main.wide { max-width: var(--wide); }
  h1 { margin: 0 0 1rem; font-size: 2.2rem; }
- .intro { margin-bottom: 2.5rem; }
- .intro h1 { margin-bottom: .5rem; }
- .intro p { margin: 0; color: var(--muted); font-size: 1.05rem; }
- .year-group { margin-bottom: 1.5rem; }
+ .hero { position: relative; margin: 0 0 3rem; padding: 3.5rem 0 2rem; }
+ .hero::before { content: ''; position: absolute; inset: -2.5rem 0 auto; height: 22rem; z-index: -1; background: radial-gradient(ellipse 60% 70% at 30% 20%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%), radial-gradient(ellipse 40% 60% at 85% 10%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 70%); pointer-events: none; }
+ .hero h1 { margin: 0 0 1rem; font-size: clamp(2.6rem, 7vw, 4.4rem); line-height: 1.15; letter-spacing: .02em; }
+ .lede { max-width: 38rem; margin: 0 0 2rem; color: var(--muted); font-size: 1.15rem; line-height: 1.9; }
+ .actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+ .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .65rem 1.3rem; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); background: var(--card); font-size: .95rem; text-decoration: none; transition: transform .15s, box-shadow .15s, border-color .15s; }
+ .btn:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: var(--shadow); }
+ .btn.primary { border-color: var(--accent); background: var(--accent); color: var(--paper); }
+ .year-group { margin-bottom: 2.5rem; }
+ @media (prefers-reduced-motion: reduce) { .btn { transition: none; } .btn:hover { transform: none; } }
 </style>

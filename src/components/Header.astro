@@ -18,6 +18,7 @@ const isActive = (href: string) =>
 ---
 
 <header class="site-header">
+ <div class="bar">
  <a class="brand" href={localePath(lang, '/')}>{site.title}</a>
  <nav class="main-nav" aria-label={site.navigation}>
   {links.map((link) => <a href={link.href} class:list={{ active: isActive(link.href) }}>{link.label}</a>)}
@@ -53,6 +54,7 @@ const isActive = (href: string) =>
     </button>)}
    </div>
   </details>
+ </div>
  </div>
 </header>
 
@@ -103,9 +105,11 @@ const isActive = (href: string) =>
 </script>
 
 <style>
- .site-header { max-width: var(--width); margin: 0 auto; padding: 1.75rem 1.25rem 1.25rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.4rem; border-bottom: 1px solid var(--line); }
- .brand { margin-inline-end: auto; font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .04em; overflow-wrap: anywhere; color: var(--ink); text-decoration: none; }
- .main-nav { display: flex; flex-wrap: wrap; gap: 1rem; }
+ .site-header { position: sticky; top: 0; z-index: 30; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 82%, transparent); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); }
+ .bar { max-width: var(--wide); margin: 0 auto; padding: .8rem 1.25rem; display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.6rem; }
+ .brand { display: inline-flex; align-items: center; gap: .6rem; margin-inline-end: auto; font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .04em; overflow-wrap: anywhere; color: var(--ink); text-decoration: none; }
+ .brand::before { content: ''; flex: none; width: .8rem; height: .8rem; border-radius: 3px; background: var(--accent); box-shadow: .3rem .3rem 0 -.05rem color-mix(in srgb, var(--accent) 35%, transparent); transform: rotate(-8deg); }
+ .main-nav { display: flex; flex-wrap: wrap; gap: 1.2rem; }
  .main-nav a { color: var(--muted); text-decoration: none; font-size: .9rem; padding-block: .35rem; border-bottom: 2px solid transparent; }
  .main-nav a:hover, .main-nav a.active { color: var(--ink); border-bottom-color: var(--accent); }
  .preferences { display: flex; align-items: center; gap: .15rem; margin-inline-start: auto; }
@@ -135,7 +139,7 @@ const isActive = (href: string) =>
  .swatch-rose { background: linear-gradient(135deg,#fcf5f6 50%,#9b3c60 50%); }
  .swatch-night { background: linear-gradient(135deg,#18212e 50%,#91bbf2 50%); }
  @media (max-width: 560px) {
-  .site-header { gap: .7rem .5rem; }
+  .bar { gap: .5rem; }
   .brand { flex-basis: 100%; }
   .main-nav { gap: .8rem; }
   .main-nav a { font-size: .85rem; }
