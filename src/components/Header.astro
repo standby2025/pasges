@@ -89,7 +89,13 @@ const isActive = (href: string) =>
    else localStorage.setItem('blog-theme', value);
   } catch {}
   document.documentElement.dataset.themeMode = value;
-  document.documentElement.dataset.theme = value === 'random' ? themes[Math.floor(Math.random() * themes.length)] : value;
+  let theme = value;
+  if (value === 'random') {
+   const pool = themes.filter((t) => t !== document.documentElement.dataset.theme);
+   theme = pool[Math.floor(Math.random() * pool.length)];
+   try { sessionStorage.setItem('blog-theme-session', theme); localStorage.setItem('blog-theme-last', theme); } catch {}
+  }
+  document.documentElement.dataset.theme = theme;
   syncTheme(); close();
   document.querySelector<HTMLElement>('#theme-picker summary')?.focus();
  }));

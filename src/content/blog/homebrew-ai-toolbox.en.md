@@ -190,7 +190,8 @@ brew install --cask homebrew-app
 
 is installed, you will get an application called Homebrew.app. Its source code warehouse is called Homebrew/BrewUI, so some people on the Internet also call it BrewUI.
 
-![Three dotted border placeholder cards, respectively indicating the Homebrew.app main interface, upgrade list and corresponding command prompt screenshots to be added. It is clearly marked as a placeholder and does not imitate or fake the real interface. Manuscript version 0.6.0, requires macOS 26 and above. Rebuild prompt: Produce a standalone native SVG infographic without HTML, scripts or remote dependencies. White background, dark blue text #203047, blue graphics #275fa4, purple distinction item tap, gray distinction not included. Width 1000 pixels, the height adjusts according to the content; labels are clearly wrapped and not cropped; Arabic text is typeset from right to left. The text language is English.](../../assets/blog/homebrew-ai-toolbox/06-screenshot-placeholders.en.svg)
+![官方 Homebrew.app（BrewUI）主窗口截图：左侧栏依次是 Installed、Upgrades、Discover、Services、Doctor、Configuration；中间是已安装软件列表，右侧是 abseil 的详情、依赖和卸载命令。来自 Homebrew/BrewUI 官方仓库（github.com/Homebrew/BrewUI），界面保持英文原貌。 重建 prompt：在 macOS 26 上用 Homebrew.app 重新截取主窗口，保留系统窗口阴影，宽约 1500 像素，界面语言保持英文，保存为 WebP。](../../assets/blog/homebrew-ai-toolbox/06-homebrew-app-main.webp)
+
 
 : the current version is 0.6.0, not yet 1.0; macOS 26 and above are required; 5,251 has been installed 30 times in the past 30 days.
 

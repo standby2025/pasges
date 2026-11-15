@@ -28,14 +28,28 @@ const fullTitle = title === siteTitle ? title : `${title} · ${siteTitle}`;
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 
-<!-- 首次绘制前应用配色，避免页面闪色；随机模式只在本次文档加载时抽取。 -->
+<!-- 首次绘制前应用配色，避免页面闪色；随机模式每次访问抽取一次。 -->
 <script is:inline>
  (() => {
   const themes = ['paper', 'mist', 'forest', 'rose', 'night'];
   let saved = null;
   try { saved = localStorage.getItem('blog-theme'); } catch {}
   const fixed = themes.includes(saved);
-  document.documentElement.dataset.theme = fixed ? saved : themes[Math.floor(Math.random() * themes.length)];
+  let theme = saved;
+  if (!fixed) {
+   // 随机模式：同一次访问（会话）内所有页面共用一套；新的访问避开上次的配色。
+   let current = null;
+   try { current = sessionStorage.getItem('blog-theme-session'); } catch {}
+   if (themes.includes(current)) theme = current;
+   else {
+    let last = null;
+    try { last = localStorage.getItem('blog-theme-last'); } catch {}
+    const pool = themes.filter((t) => t !== last);
+    theme = pool[Math.floor(Math.random() * pool.length)];
+    try { sessionStorage.setItem('blog-theme-session', theme); localStorage.setItem('blog-theme-last', theme); } catch {}
+   }
+  }
+  document.documentElement.dataset.theme = theme;
   document.documentElement.dataset.themeMode = fixed ? saved : 'random';
  })();
 </script>
