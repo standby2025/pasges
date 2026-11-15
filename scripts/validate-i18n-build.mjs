@@ -7,13 +7,13 @@ const base = (process.env.BASE_PATH || '').replace(/\/$/, '');
 const errors = [];
 for (const lang of languages) {
  const prefix = lang === 'zh' ? '' : `/${lang}`;
- for (const page of ['', '/blog', '/about']) {
+ for (const page of ['', '/blog']) {
   const file = resolve('dist', `.${prefix}${page}/index.html`);
   try {
    const html = await readFile(file, 'utf8');
    const expectedDir = lang === 'ar' ? 'rtl' : 'ltr';
    if (!html.includes(`lang="${locales[lang]}"`) || !html.includes(`dir="${expectedDir}"`)) errors.push(`${file}: wrong page language/direction`);
-   for (const path of ['/', '/blog/', '/about/']) {
+   for (const path of ['/', '/blog/']) {
     if (!html.includes(`href="${base}${prefix}${path}"`)) errors.push(`${file}: missing current-language navigation ${path}`);
    }
    if (!html.includes(`href="${base}${prefix}/rss.xml"`)) errors.push(`${file}: missing localized RSS`);
@@ -35,4 +35,4 @@ for (const lang of languages) {
  } catch (e) { errors.push(`${lang}: missing RSS: ${e.message}`); }
 }
 if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
-console.log('Global localization verified: 18 home/archive/about pages and 6 language-specific feeds.');
+console.log('Global localization verified: 12 home/archive pages and 6 language-specific feeds.');

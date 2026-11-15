@@ -1,10 +1,10 @@
 :root {
-	--paper: #faf8f4;
-	--ink: #1f2328;
-	--muted: #6b6f76;
-	--line: #e3dfd6;
-	--accent: #8a3b2e;
-	--code-bg: #f1ede4;
+	--paper: #faf7f2;
+	--ink: #1f1d1a;
+	--muted: #6e6860;
+	--line: #e6e0d5;
+	--accent: #b23a2a;
+	--code-bg: #f0ebe2;
 	--width: 720px;
 	--wide: 1080px;
 	--radius: 14px;
@@ -18,22 +18,27 @@
 	color-scheme: light;
 }
 /* 配色由页头选择器控制，避免系统暗色覆盖用户选择。 */
-:root[data-theme='mist'] {
- --paper: #f4f7fb; --ink: #202d40; --muted: #596b82;
- --line: #d9e2ee; --accent: #275fa4; --code-bg: #e7edf5;
+:root[data-theme='snow'] {
+ --paper: #ffffff; --ink: #15181c; --muted: #616873;
+ --line: #e5e8ec; --accent: #2459d6; --code-bg: #f3f5f7;
 }
-:root[data-theme='forest'] {
- --paper: #f3f7f1; --ink: #24372b; --muted: #5c705f;
- --line: #d5e1d1; --accent: #356b45; --code-bg: #e5ede0;
+:root[data-theme='celadon'] {
+ --paper: #f5f8f6; --ink: #1b2622; --muted: #5b6a64;
+ --line: #dbe4df; --accent: #1f6f5c; --code-bg: #e9efec;
 }
-:root[data-theme='rose'] {
- --paper: #fcf5f6; --ink: #402b33; --muted: #80616d;
- --line: #ead9df; --accent: #9b3c60; --code-bg: #f3e6eb;
+:root[data-theme='sand'] {
+ --paper: #f6f1e7; --ink: #2a251e; --muted: #6f6658;
+ --line: #e2d9c8; --accent: #94520f; --code-bg: #ece5d6;
 }
-:root[data-theme='night'] {
+:root[data-theme='ink'] {
  color-scheme: dark;
- --paper: #18212e; --ink: #e4eaf3; --muted: #a5b5ca;
- --line: #344359; --accent: #91bbf2; --code-bg: #222f41;
+ --paper: #16181c; --ink: #e7e9ec; --muted: #9aa3ae;
+ --line: #2c3138; --accent: #7fb2ff; --code-bg: #1f2328;
+}
+:root[data-theme='dusk'] {
+ color-scheme: dark;
+ --paper: #1e1b18; --ink: #ede7dd; --muted: #aaa093;
+ --line: #383129; --accent: #e3a857; --code-bg: #28241f;
 }
 
 * {
@@ -150,8 +155,8 @@ img {
 .astro-code {
 	background-color: var(--code-bg) !important;
 }
-:root[data-theme='night'] .astro-code,
-:root[data-theme='night'] .astro-code span {
+:root:is([data-theme='ink'], [data-theme='dusk']) .astro-code,
+:root:is([data-theme='ink'], [data-theme='dusk']) .astro-code span {
  color: var(--shiki-dark) !important;
 }
 

@@ -11,7 +11,8 @@ interface Props {
 const { title, description, lang = 'zh' } = Astro.props;
 const siteTitle = siteUI[lang].title;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const fullTitle = title === siteTitle ? title : `${title} · ${siteTitle}`;
+const tagline = siteUI[lang].tagline;
+const fullTitle = title !== siteTitle ? `${title} · ${siteTitle}` : tagline ? `${title} · ${tagline}` : title;
 ---
 
 <meta charset="utf-8" />
@@ -31,7 +32,7 @@ const fullTitle = title === siteTitle ? title : `${title} · ${siteTitle}`;
 <!-- 首次绘制前应用配色，避免页面闪色；随机模式每次访问抽取一次。 -->
 <script is:inline>
  (() => {
-  const themes = ['paper', 'mist', 'forest', 'rose', 'night'];
+  const themes = ['paper', 'snow', 'celadon', 'sand', 'ink', 'dusk'];
   let saved = null;
   try { saved = localStorage.getItem('blog-theme'); } catch {}
   const fixed = themes.includes(saved);

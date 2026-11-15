@@ -1,0 +1,16 @@
+---
+import { SITE_TITLE_VARIANTS } from '../consts';
+interface Props { label: string; }
+const { label } = Astro.props;
+---
+<span class="rotator" role="img" aria-label={label}>
+ {SITE_TITLE_VARIANTS.map((variant, index) => <span lang={variant.lang} aria-hidden="true" style={`--i:${index}`}>{variant.text}</span>)}
+</span>
+
+<style>
+ .rotator { display: grid; }
+ .rotator span { grid-area: 1 / 1; opacity: 0; white-space: nowrap; animation: rotate-title 9s calc(var(--i) * 3s) infinite; }
+ @keyframes rotate-title { 0% { opacity: 0; transform: translateY(.25em); } 6%, 30% { opacity: 1; transform: none; } 36%, 100% { opacity: 0; transform: translateY(-.25em); } }
+ @keyframes fade-title { 0% { opacity: 0; } 6%, 30% { opacity: 1; } 36%, 100% { opacity: 0; } }
+ @media (prefers-reduced-motion: reduce) { .rotator span { animation-name: fade-title; } }
+</style>
